@@ -1,12 +1,21 @@
 // Edita SOLO este archivo para cambiar el contenido de tu portfolio.
+//
+// Imágenes: guárdalas en la carpeta /public y escríbelas aquí con "/" delante,
+// por ejemplo "/projects/uno.jpg". Para las fotos tuyas, lo ideal es un PNG
+// recortado (sin fondo). Si dejas una ruta vacía, se muestra un espacio de borrador.
 
 export const profile = {
   name: "Tu Nombre",
-  role: "Diseñadora y desarrolladora web",
-  intro:
-    "Creo experiencias web claras y cuidadas. Aquí tienes una selección de mis proyectos y cómo contactarme.",
-  about:
-    "Escribe aquí un párrafo sobre ti: qué haces, qué te apasiona y qué tipo de proyectos buscas. Mantenlo corto y en tu propia voz.",
+  role: "Diseño de producto digital",
+  headline:
+    "Diseño productos digitales claros, desde la primera idea hasta la pantalla final.",
+  availability: "Disponible para nuevos proyectos",
+  cutout: "", // foto recortada para la portada, por ejemplo "/yo-portada.png"
+  aboutPhoto: "", // foto recortada para "Sobre mí", por ejemplo "/yo-sobre-mi.png"
+  about: [
+    "Escribe aquí un párrafo sobre ti: qué haces, cómo trabajas y qué tipo de proyectos buscas.",
+    "Un segundo párrafo, opcional, con algo más personal: qué te inspira o qué te gusta hacer fuera del trabajo.",
+  ],
   email: "tu-mail@ejemplo.com",
   links: [
     { label: "GitHub", href: "https://github.com/tu-usuario" },
@@ -14,12 +23,25 @@ export const profile = {
   ],
 };
 
-export const skills = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Figma"];
+export const education = [
+  { title: "Tu título o formación", place: "Universidad o escuela, ciudad" },
+  { title: "Un curso o diplomado", place: "Institución, ciudad" },
+];
+
+export const languages = ["Español · nativo", "Inglés · intermedio"];
+
+export const tools = ["Figma", "Next.js", "React", "TypeScript", "Tailwind", "Notion"];
+
+export type ProjectColor = "yellow" | "green" | "pink" | "blue";
 
 export type Project = {
   title: string;
-  description: string;
+  year: string;
+  role: string;
+  summary: string;
   tags: string[];
+  color: ProjectColor; // color de la etiqueta de la carpeta
+  image?: string; // por ejemplo "/projects/uno.jpg"
   href?: string; // enlace a la web en vivo
   repo?: string; // enlace al código
 };
@@ -27,23 +49,40 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Proyecto uno",
-    description:
-      "Describe en una o dos frases qué problema resuelve y cuál fue tu papel.",
-    tags: ["Next.js", "TypeScript"],
+    year: "2026",
+    role: "Diseño y desarrollo",
+    summary:
+      "Describe en una o dos frases qué problema resolvía y qué cambió gracias a tu trabajo.",
+    tags: ["Next.js", "UX"],
+    color: "yellow",
     href: "https://ejemplo.com",
     repo: "https://github.com/tu-usuario/proyecto-uno",
   },
   {
     title: "Proyecto dos",
-    description:
-      "Otra descripción breve. Destaca el resultado, no solo las tecnologías.",
-    tags: ["React", "Tailwind"],
+    year: "2025",
+    role: "Diseño de interfaz",
+    summary:
+      "Otra descripción breve. Cuenta el resultado, no solo las herramientas que usaste.",
+    tags: ["UI", "Figma"],
+    color: "green",
     repo: "https://github.com/tu-usuario/proyecto-dos",
   },
   {
     title: "Proyecto tres",
-    description: "Un tercer proyecto para completar la cuadrícula.",
-    tags: ["Diseño", "Figma"],
+    year: "2025",
+    role: "Identidad y web",
+    summary: "Un tercer proyecto. Puedes borrar los que no uses o añadir más.",
+    tags: ["Marca", "Web"],
+    color: "pink",
     href: "https://ejemplo.com",
+  },
+  {
+    title: "Proyecto cuatro",
+    year: "2024",
+    role: "Investigación y prototipo",
+    summary: "Un cuarto proyecto, para que el escritorio no se vea vacío.",
+    tags: ["Research", "Prototipo"],
+    color: "blue",
   },
 ];
