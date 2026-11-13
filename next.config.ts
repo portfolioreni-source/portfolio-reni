@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Genera HTML estático en la carpeta "out", que se puede publicar en cualquier hosting.
+  output: "export",
   turbopack: {
     rules: {
       "*.css": {
