@@ -12,12 +12,16 @@ import {
 import type { Project, ProjectColor } from "@/data/portfolio";
 import { FolderIcon } from "./FolderIcon";
 
-const tagColors: Record<ProjectColor, string> = {
-  yellow: "var(--yellow)",
-  green: "var(--green)",
-  pink: "var(--pink)",
-  blue: "var(--blue-tag)",
+// Cada color de etiqueta lleva su color de texto, para que siempre se lea bien.
+const tagColors: Record<ProjectColor, { bg: string; fg: string }> = {
+  peony: { bg: "var(--peony)", fg: "var(--burgundy)" },
+  pistachio: { bg: "var(--pistachio)", fg: "var(--burgundy)" },
+  burgundy: { bg: "var(--burgundy)", fg: "var(--peony)" },
+  fuchsia: { bg: "var(--fuchsia)", fg: "#ffffff" },
 };
+
+const tagVars = (c: ProjectColor) =>
+  ({ "--tag-bg": tagColors[c].bg, "--tag-fg": tagColors[c].fg }) as CSSProperties;
 
 const WIN_W = 640;
 const spots = [
@@ -187,10 +191,10 @@ export function Desktop({ projects }: { projects: Project[] }) {
               } as CSSProperties
             }
           >
-            <FolderIcon className="folder-icon w-24 drop-shadow-[0_8px_10px_rgba(18,18,22,0.18)] md:w-28" />
+            <FolderIcon className="folder-icon w-24 drop-shadow-[0_8px_10px_rgba(119,5,35,0.22)] md:w-28" />
             <span
-              className="folder-label mt-2 rounded-md px-2 py-0.5 text-sm font-medium"
-              style={{ background: tagColors[p.color] }}
+              className="folder-label mt-2 rounded-md px-2 py-0.5 text-sm font-semibold"
+              style={tagVars(p.color)}
             >
               {p.title}
             </span>
@@ -301,8 +305,11 @@ export function Desktop({ projects }: { projects: Project[] }) {
                     {p.tags.map((t) => (
                       <li
                         key={t}
-                        className="rounded-md px-2.5 py-1 text-xs font-medium"
-                        style={{ background: tagColors[p.color] }}
+                        className="rounded-md px-2.5 py-1 text-xs font-semibold"
+                        style={{
+                          background: tagColors[p.color].bg,
+                          color: tagColors[p.color].fg,
+                        }}
                       >
                         {t}
                       </li>

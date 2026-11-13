@@ -32,7 +32,8 @@ export const languages = ["Español · nativo", "Inglés · intermedio"];
 
 export const tools = ["Figma", "Next.js", "React", "TypeScript", "Tailwind", "Notion"];
 
-export type ProjectColor = "yellow" | "green" | "pink" | "blue";
+// Colores disponibles para las etiquetas de cada proyecto.
+export type ProjectColor = "peony" | "pistachio" | "burgundy" | "fuchsia";
 
 export type Project = {
   title: string;
@@ -54,7 +55,7 @@ export const projects: Project[] = [
     summary:
       "Describe en una o dos frases qué problema resolvía y qué cambió gracias a tu trabajo.",
     tags: ["Next.js", "UX"],
-    color: "yellow",
+    color: "fuchsia",
     href: "https://ejemplo.com",
     repo: "https://github.com/tu-usuario/proyecto-uno",
   },
@@ -65,7 +66,7 @@ export const projects: Project[] = [
     summary:
       "Otra descripción breve. Cuenta el resultado, no solo las herramientas que usaste.",
     tags: ["UI", "Figma"],
-    color: "green",
+    color: "pistachio",
     repo: "https://github.com/tu-usuario/proyecto-dos",
   },
   {
@@ -74,7 +75,7 @@ export const projects: Project[] = [
     role: "Identidad y web",
     summary: "Un tercer proyecto. Puedes borrar los que no uses o añadir más.",
     tags: ["Marca", "Web"],
-    color: "pink",
+    color: "peony",
     href: "https://ejemplo.com",
   },
   {
@@ -83,6 +84,6 @@ export const projects: Project[] = [
     role: "Investigación y prototipo",
     summary: "Un cuarto proyecto, para que el escritorio no se vea vacío.",
     tags: ["Research", "Prototipo"],
-    color: "blue",
+    color: "burgundy",
   },
 ];

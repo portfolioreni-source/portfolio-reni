@@ -2,17 +2,19 @@
 
 :root {
   color-scheme: light;
-  --paper: #ffffff;
-  --desk: #e7e7eb;
-  --surface: #f3f3f6;
-  --ink: #121216;
-  --muted: #55555f;
-  --sel: #1f6bff;
-  --sel-soft: rgba(31, 107, 255, 0.16);
-  --yellow: #fff27a;
-  --green: #b9f3a6;
-  --pink: #ffbedf;
-  --blue-tag: #bfd9ff;
+  /* Paleta: crema de fondo, peony, burgundy, pistachio, fuchsia y blood orange */
+  --paper: #fbf8ec;
+  --desk: #fad2e1;
+  --surface: #fde9f0;
+  --ink: #770523;
+  --muted: #8c4358;
+  --sel: #e8106a;
+  --sel-soft: rgba(232, 16, 106, 0.16);
+  --peony: #fad2e1;
+  --pistachio: #ccda8c;
+  --burgundy: #770523;
+  --fuchsia: #e8106a;
+  --orange: #ee4012;
 }
 
 @theme inline {
@@ -54,7 +56,7 @@ body {
   position: relative;
   display: inline-block;
   padding: 0 0.28em;
-  background: var(--sel-soft);
+  background: var(--peony);
 }
 .selected::before,
 .selected::after {
@@ -83,7 +85,7 @@ body {
 .desk-surface {
   background-color: var(--surface);
   background-image: radial-gradient(
-    rgba(18, 18, 22, 0.1) 1px,
+    rgba(119, 5, 35, 0.16) 1px,
     transparent 1.2px
   );
   background-size: 22px 22px;
@@ -91,10 +93,10 @@ body {
 
 /* Espacio para imágenes, rayado de borrador */
 .hatch {
-  background-color: #f6f6f9;
+  background-color: #fff3f7;
   background-image: repeating-linear-gradient(
     135deg,
-    rgba(31, 107, 255, 0.1) 0 1px,
+    rgba(232, 16, 106, 0.13) 0 1px,
     transparent 1px 11px
   );
 }
@@ -106,6 +108,8 @@ body {
   transform: translateY(-3px) scale(1.04);
 }
 .folder .folder-label {
+  background: var(--tag-bg);
+  color: var(--tag-fg);
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 .folder[data-selected="true"] .folder-label,
@@ -128,7 +132,7 @@ body {
   white-space: nowrap;
   padding: 3px 10px;
   border-radius: 8px;
-  background: rgba(18, 18, 22, 0.88);
+  background: rgba(60, 3, 18, 0.92);
   color: #fff;
   font-size: 0.75rem;
   opacity: 0;

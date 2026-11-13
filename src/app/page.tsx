@@ -13,14 +13,22 @@ import { Dock } from "@/components/Dock";
 import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
 
-const appColors = ["#ff6b6b", "#ffb84d", "#34c38f", "#4c9bff", "#a78bfa", "#ff8ad0"];
+// Iconos de app para las herramientas: color de fondo y de texto de cada uno.
+const appColors = [
+  { bg: "var(--fuchsia)", fg: "#ffffff" },
+  { bg: "var(--orange)", fg: "#ffffff" },
+  { bg: "var(--pistachio)", fg: "var(--burgundy)" },
+  { bg: "var(--burgundy)", fg: "var(--peony)" },
+  { bg: "var(--peony)", fg: "var(--burgundy)" },
+  { bg: "var(--fuchsia)", fg: "#ffffff" },
+];
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 function Cursor({ label }: { label: string }) {
   return (
     <div aria-hidden className="float pointer-events-none absolute -right-2 top-full z-20 mt-1 hidden sm:block">
-      <svg viewBox="0 0 24 24" className="size-7 drop-shadow" fill="#121216" stroke="#fff" strokeWidth="1.5" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" className="size-7 drop-shadow" fill="#770523" stroke="#fff" strokeWidth="1.5" strokeLinejoin="round">
         <path d="M4 3l7 17 2.4-7.2L21 10z" />
       </svg>
       <span className="ml-5 -mt-1 inline-block rounded-full bg-sel px-3 py-1 text-xs font-medium text-white">
@@ -49,7 +57,7 @@ export default function Home() {
                 className="rise mb-6 inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm shadow-sm"
                 style={delay(0)}
               >
-                <span aria-hidden className="size-2 rounded-full bg-[#34c38f] ring-4 ring-[#34c38f]/25" />
+                <span aria-hidden className="size-2 rounded-full bg-[var(--orange)] ring-4 ring-[var(--orange)]/25" />
                 {profile.availability}
               </p>
 
@@ -64,7 +72,7 @@ export default function Home() {
                 ))}
               </h1>
 
-              <p className="rise mt-6 text-lg font-medium text-sel" style={delay(180)}>
+              <p className="rise mt-6 text-xl font-semibold text-sel" style={delay(180)}>
                 {profile.role}
               </p>
               <p
@@ -149,8 +157,11 @@ export default function Home() {
                   <li
                     key={t}
                     title={t}
-                    className="grid size-12 place-items-center rounded-[0.85rem] text-sm font-bold text-white shadow-sm"
-                    style={{ background: appColors[i % appColors.length] }}
+                    className="grid size-12 place-items-center rounded-[0.85rem] text-sm font-bold shadow-sm"
+                    style={{
+                      background: appColors[i % appColors.length].bg,
+                      color: appColors[i % appColors.length].fg,
+                    }}
                   >
                     <span aria-hidden>{t.slice(0, 2)}</span>
                     <span className="sr-only">{t}</span>
