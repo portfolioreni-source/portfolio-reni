@@ -1,5 +1,5 @@
 // Icono de carpeta dibujado en SVG (sin gradientes con id, para poder repetirlo).
-// Colores de la paleta: fuchsia por detrás, peony por delante.
+// Colores de la paleta: fuchsia por detrás, rosa vivo por delante.
 export function FolderIcon({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -10,10 +10,10 @@ export function FolderIcon({ className = "" }: { className?: string }) {
     >
       <path
         d="M6 14a8 8 0 0 1 8-8h28a8 8 0 0 1 6 2.7l5.2 6A8 8 0 0 0 59.3 17H98a8 8 0 0 1 8 8v8H6z"
-        fill="#e8106a"
+        fill="#f0087a"
       />
-      <rect x="6" y="25" width="100" height="61" rx="9" fill="#fbb6cf" />
-      <rect x="6" y="25" width="100" height="14" rx="7" fill="#fdd3e2" />
+      <rect x="6" y="25" width="100" height="61" rx="9" fill="#ff8fc0" />
+      <rect x="6" y="25" width="100" height="14" rx="7" fill="#ffb3d5" />
       <rect
         x="6.75"
         y="25.75"

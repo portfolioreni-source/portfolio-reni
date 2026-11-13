@@ -3,18 +3,18 @@
 :root {
   color-scheme: light;
   /* Paleta: crema de fondo, peony, burgundy, pistachio, fuchsia y blood orange */
-  --paper: #fbf8ec;
-  --desk: #fad2e1;
-  --surface: #fde9f0;
-  --ink: #770523;
-  --muted: #8c4358;
-  --sel: #e8106a;
-  --sel-soft: rgba(232, 16, 106, 0.16);
-  --peony: #fad2e1;
-  --pistachio: #ccda8c;
-  --burgundy: #770523;
-  --fuchsia: #e8106a;
-  --orange: #ee4012;
+  --paper: #fff9ec;
+  --desk: #f0087a;
+  --surface: #ffe3ef;
+  --ink: #7a0020;
+  --muted: #a3123f;
+  --sel: #f0087a;
+  --sel-soft: rgba(240, 8, 122, 0.18);
+  --peony: #ffc2dc;
+  --pistachio: #cdea6a;
+  --burgundy: #7a0020;
+  --fuchsia: #f0087a;
+  --orange: #ff4a14;
 }
 
 @theme inline {
@@ -24,6 +24,10 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-sel: var(--sel);
+  --color-peony: var(--peony);
+  --color-pistachio: var(--pistachio);
+  --color-burgundy: var(--burgundy);
+  --color-orange: var(--orange);
   --font-display: var(--font-display), system-ui, sans-serif;
   --font-sans: var(--font-body), system-ui, sans-serif;
 }
@@ -37,8 +41,6 @@ body {
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  /* espacio para que el dock no tape el final de la página */
-  padding-bottom: 6rem;
 }
 
 ::selection {
@@ -79,6 +81,11 @@ body {
   background:
     radial-gradient(circle at 50% 100%, var(--sel) 5.5px, transparent 6px),
     linear-gradient(var(--sel), var(--sel)) center / 3px 100% no-repeat;
+}
+
+/* En la banda rosa el resaltado es crema, para que se note */
+.band-peony .selected {
+  background: var(--paper);
 }
 
 /* ---------- Escritorio ---------- */

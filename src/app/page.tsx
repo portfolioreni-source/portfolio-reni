@@ -31,7 +31,7 @@ function Cursor({ label }: { label: string }) {
       <svg viewBox="0 0 24 24" className="size-7 drop-shadow" fill="#770523" stroke="#fff" strokeWidth="1.5" strokeLinejoin="round">
         <path d="M4 3l7 17 2.4-7.2L21 10z" />
       </svg>
-      <span className="ml-5 -mt-1 inline-block rounded-full bg-sel px-3 py-1 text-xs font-medium text-white">
+      <span className="ml-5 -mt-1 inline-block rounded-full bg-ink px-3 py-1 text-xs font-semibold text-peony">
         {label}
       </span>
     </div>
@@ -62,7 +62,7 @@ export default function Home() {
               </p>
 
               <h1
-                className="rise font-display text-[clamp(4rem,15vw,10.5rem)] font-extrabold leading-[0.85] tracking-[-0.045em] lg:-mr-40"
+                className="rise font-display text-[clamp(4rem,15vw,10.5rem)] font-extrabold leading-[0.85] tracking-[-0.045em] text-paper lg:-mr-40"
                 style={delay(80)}
               >
                 {nameLines.map((word) => (
@@ -72,11 +72,13 @@ export default function Home() {
                 ))}
               </h1>
 
-              <p className="rise mt-6 text-xl font-semibold text-sel" style={delay(180)}>
-                {profile.role}
+              <p className="rise mt-6" style={delay(180)}>
+                <span className="inline-block rounded-full bg-pistachio px-4 py-1.5 text-lg font-bold text-burgundy">
+                  {profile.role}
+                </span>
               </p>
               <p
-                className="rise mt-3 max-w-md text-xl leading-snug text-muted"
+                className="rise mt-4 max-w-md text-xl leading-snug text-paper"
                 style={delay(240)}
               >
                 {profile.headline}
@@ -85,14 +87,14 @@ export default function Home() {
               <div className="rise mt-8 flex flex-wrap items-center gap-3" style={delay(320)}>
                 <a
                   href="#proyectos"
-                  className="relative rounded-full bg-ink px-6 py-3 font-medium text-paper transition-colors hover:bg-sel"
+                  className="relative rounded-full bg-ink px-6 py-3 font-semibold text-peony transition-colors hover:bg-orange hover:text-white"
                 >
                   Abrir proyectos
                   <Cursor label={nameLines[0]} />
                 </a>
                 <a
                   href="#contacto"
-                  className="rounded-full bg-paper px-6 py-3 font-medium shadow-sm transition-colors hover:text-sel"
+                  className="rounded-full bg-paper px-6 py-3 font-semibold text-burgundy shadow-sm transition-colors hover:bg-pistachio"
                 >
                   Escríbeme
                 </a>
@@ -124,11 +126,8 @@ export default function Home() {
         </section>
 
         {/* ---------------- Sobre mí ---------------- */}
-        <section
-          id="sobre-mi"
-          className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 py-24 sm:py-32"
-        >
-          <div className="grid items-center gap-14 md:grid-cols-12">
+        <section id="sobre-mi" className="scroll-mt-10 bg-pistachio">
+          <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-6 py-24 sm:py-32 md:grid-cols-12">
             <div className="md:col-span-5">
               {profile.aboutPhoto ? (
                 <Image
@@ -224,10 +223,9 @@ export default function Home() {
         </section>
 
         {/* ---------------- Contacto ---------------- */}
-        <section
-          id="contacto"
-          className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 pb-16 text-center"
-        >
+        <section id="contacto" className="band-peony scroll-mt-10 bg-peony">
+          {/* el espacio inferior evita que el dock tape el final */}
+          <div className="mx-auto w-full max-w-6xl px-6 pb-40 pt-24 text-center">
           <h2 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-8xl">
             <span className="selected">hablemos</span>
             <br />
@@ -262,6 +260,7 @@ export default function Home() {
           </div>
 
           <p className="mt-20 text-sm text-muted">© 2026 {profile.name}</p>
+          </div>
         </section>
       </main>
 
