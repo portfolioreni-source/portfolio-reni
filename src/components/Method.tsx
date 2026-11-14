@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import type { MethodStep } from "@/data/portfolio";
+
+// Cada día aparece un poco después del anterior cuando el calendario llega a pantalla
+const popDelay = (i: number) => ({ "--rd": `${300 + i * 90}ms` }) as CSSProperties;
 
 const dayShort = ["lun", "mar", "mié", "jue", "vie", "sáb", "dom"];
 const dayLong = [
@@ -35,7 +38,10 @@ export function Method({ steps }: { steps: MethodStep[] }) {
     "grid h-9 min-w-9 place-items-center rounded-full bg-surface px-3 text-sm font-semibold text-burgundy transition-colors hover:bg-peony disabled:opacity-40 disabled:hover:bg-surface";
 
   return (
-    <div className="overflow-hidden rounded-[1.75rem] border border-ink/10 bg-paper shadow-[0_30px_70px_-30px_rgba(121,0,46,0.45)]">
+    <div
+      data-reveal=""
+      className="overflow-hidden rounded-[1.75rem] border border-ink/10 bg-paper shadow-[0_30px_70px_-30px_rgba(121,0,46,0.45)]"
+    >
       {/* Barra superior, como la de la app Calendario */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/10 px-5 py-4">
         <div className="flex items-center gap-4">
@@ -98,6 +104,9 @@ export function Method({ steps }: { steps: MethodStep[] }) {
             return (
               <div
                 key={short}
+                data-reveal=""
+                data-reveal-type="pop"
+                style={popDelay(i)}
                 className="flex min-h-16 items-center gap-3 bg-ink/5 p-3 text-muted md:min-h-44 md:flex-col md:items-stretch md:gap-0"
               >
                 <span className="w-16 text-sm md:hidden">{short}</span>
@@ -115,6 +124,9 @@ export function Method({ steps }: { steps: MethodStep[] }) {
               key={short}
               type="button"
               aria-pressed={active}
+              data-reveal=""
+              data-reveal-type="pop"
+              style={popDelay(i)}
               onClick={() => setSel(i)}
               className={`flex min-h-20 items-center gap-3 p-3 text-left transition-colors md:min-h-44 md:flex-col md:items-stretch md:gap-0 ${
                 active ? "bg-surface" : "hover:bg-surface/60"

@@ -15,6 +15,7 @@ import { Dock } from "@/components/Dock";
 import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
 import { Method } from "@/components/Method";
+import { ScrollEffects } from "@/components/ScrollEffects";
 
 // Colores de las tarjetas de habilidades (fondo y texto, ya con buen contraste)
 const serviceColors = [
@@ -34,14 +35,28 @@ const appColors = [
   { bg: "var(--fuchsia)", fg: "#ffffff" },
 ];
 
+// Retraso de la animación de entrada de la portada
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+// Retraso de la aparición al hacer scroll (para que los elementos entren uno tras otro)
+const stagger = (ms: number) => ({ "--rd": `${ms}ms` }) as CSSProperties;
+// Velocidad del parallax: cuanto mayor, más se desplaza esa capa al bajar
+const speed = (ps: number) => ({ "--ps": ps }) as CSSProperties;
+
+// Palabras de la cinta que se mueve entre la portada y "Sobre mí"
+const marqueeWords = [...services.map((s) => s.title), ...tools];
 
 export default function Home() {
   const nameLines = profile.name.split(" ");
 
   return (
     <>
+      <ScrollEffects />
       <MenuBar name={profile.name} />
+      {/* Barra de progreso de lectura, pegada bajo la barra de menú */}
+      <div
+        aria-hidden
+        className="scroll-progress fixed inset-x-0 top-8 z-40 h-[3px] bg-fuchsia"
+      />
 
       <main>
         {/* ---------------- Portada ---------------- */}
@@ -50,7 +65,10 @@ export default function Home() {
           className="relative overflow-hidden bg-desk pt-8"
         >
           <div className="mx-auto grid min-h-[92svh] w-full max-w-6xl items-end gap-4 px-6 pt-20 lg:grid-cols-12">
-            <div className="relative z-10 pb-16 lg:col-span-8 lg:pb-28">
+            <div
+              className="parallax relative z-10 pb-16 lg:col-span-8 lg:pb-28"
+              style={speed(0.07)}
+            >
               <p
                 className="rise mb-6 inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm shadow-sm"
                 style={delay(0)}
@@ -71,12 +89,12 @@ export default function Home() {
               </h1>
 
               <p className="rise mt-6" style={delay(180)}>
-                <span className="inline-block rounded-full bg-pistachio px-4 py-1.5 text-lg font-bold text-burgundy">
+                <span className="inline-block rounded-3xl bg-pistachio px-4 py-1.5 text-lg font-bold leading-snug text-burgundy sm:rounded-full">
                   {profile.role}
                 </span>
               </p>
               <p
-                className="rise mt-4 max-w-md text-xl leading-snug text-paper"
+                className="rise mt-4 max-w-xl text-xl leading-snug text-paper"
                 style={delay(240)}
               >
                 {profile.headline}
@@ -98,34 +116,62 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rise relative mx-auto flex w-full max-w-sm items-end justify-center lg:col-span-4 lg:max-w-none" style={delay(200)}>
-              {profile.cutout ? (
-                <Image
-                  src={profile.cutout}
-                  alt={`Retrato de ${profile.name}`}
-                  width={700}
-                  height={900}
-                  priority
-                  className="relative z-0 h-auto w-full max-w-md object-contain"
-                />
-              ) : (
-                <div
-                  aria-hidden
-                  className="hatch grid h-[22rem] w-64 place-items-end rounded-t-[999px] border border-b-0 border-ink/10 pb-8 sm:h-[30rem] sm:w-80"
-                >
-                  <span className="px-6 text-center text-xs uppercase tracking-widest text-sel/70">
-                    Tu foto recortada
-                  </span>
-                </div>
-              )}
+            <div
+              className="parallax relative mx-auto flex w-full max-w-sm items-end justify-center lg:col-span-4 lg:max-w-none"
+              style={speed(0.2)}
+            >
+              <div
+                className="rise flex w-full items-end justify-center"
+                style={delay(200)}
+              >
+                {profile.cutout ? (
+                  <Image
+                    src={profile.cutout}
+                    alt={`Retrato de ${profile.name}`}
+                    width={700}
+                    height={900}
+                    priority
+                    className="relative z-0 h-auto w-full max-w-md object-contain"
+                  />
+                ) : (
+                  <div
+                    aria-hidden
+                    className="hatch grid h-[22rem] w-64 place-items-end rounded-t-[999px] border border-b-0 border-ink/10 pb-8 sm:h-[30rem] sm:w-80"
+                  >
+                    <span className="px-6 text-center text-xs uppercase tracking-widest text-sel/70">
+                      Tu foto recortada
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
+        {/* Cinta en movimiento (decorativa) */}
+        <div aria-hidden className="marquee">
+          <div className="marquee-track font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 items-center">
+                {marqueeWords.map((w) => (
+                  <span key={w} className="flex items-center">
+                    <span className="px-6 py-4">{w}</span>
+                    <span className="text-fuchsia">✦</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ---------------- Sobre mí ---------------- */}
         <section id="sobre-mi" className="scroll-mt-10 bg-pistachio">
           <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-6 py-24 sm:py-32 md:grid-cols-12">
-            <div className="md:col-span-5">
+            <div
+              className="md:col-span-5"
+              data-reveal=""
+              data-reveal-type="left"
+            >
               {profile.aboutPhoto ? (
                 <Image
                   src={profile.aboutPhoto}
@@ -153,11 +199,16 @@ export default function Home() {
                   <li
                     key={t}
                     title={t}
+                    data-reveal=""
+                    data-reveal-type="pop"
                     className="grid size-12 place-items-center rounded-[0.85rem] text-sm font-bold shadow-sm"
-                    style={{
-                      background: appColors[i % appColors.length].bg,
-                      color: appColors[i % appColors.length].fg,
-                    }}
+                    style={
+                      {
+                        background: appColors[i % appColors.length].bg,
+                        color: appColors[i % appColors.length].fg,
+                        "--rd": `${250 + i * 80}ms`,
+                      } as CSSProperties
+                    }
                   >
                     <span aria-hidden>{t.slice(0, 2)}</span>
                     <span className="sr-only">{t}</span>
@@ -167,20 +218,34 @@ export default function Home() {
             </div>
 
             <div className="md:col-span-7">
-              <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+              <h2
+                className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl"
+                data-reveal=""
+              >
                 <span className="selected">sobre mí</span>
               </h2>
 
-              <div className="mt-10 space-y-5 text-lg leading-relaxed sm:text-xl">
+              <div
+                className="mt-10 space-y-5 text-lg leading-relaxed sm:text-xl"
+                data-reveal=""
+                style={stagger(150)}
+              >
                 {profile.about.map((para) => (
                   <p key={para}>{para}</p>
                 ))}
               </div>
 
-              <h3 className="mt-12 text-sm font-bold">Educación</h3>
+              <h3 className="mt-12 text-sm font-bold" data-reveal="">
+                Educación
+              </h3>
               <ul className="mt-4 space-y-4">
-                {education.map((e) => (
-                  <li key={e.title} className="flex items-center gap-4">
+                {education.map((e, i) => (
+                  <li
+                    key={e.title}
+                    data-reveal=""
+                    style={stagger(i * 120)}
+                    className="flex items-center gap-4"
+                  >
                     <FolderIcon className="w-11 shrink-0" />
                     <p>
                       <span className="block font-medium">{e.title}</span>
@@ -190,11 +255,16 @@ export default function Home() {
                 ))}
               </ul>
 
-              <h3 className="mt-12 text-sm font-bold">Idiomas</h3>
+              <h3 className="mt-12 text-sm font-bold" data-reveal="">
+                Idiomas
+              </h3>
               <ul className="mt-4 flex flex-wrap gap-3">
-                {languages.map((l) => (
+                {languages.map((l, i) => (
                   <li
                     key={l}
+                    data-reveal=""
+                    data-reveal-type="pop"
+                    style={stagger(i * 120)}
                     className="rounded-[1.1rem] rounded-br-md bg-sel px-4 py-2 text-sm font-medium text-white"
                   >
                     {l}
@@ -210,10 +280,17 @@ export default function Home() {
           id="habilidades"
           className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 py-24 sm:py-32"
         >
-          <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+          <h2
+            className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl"
+            data-reveal=""
+          >
             <span className="selected">habilidades</span>
           </h2>
-          <p className="mt-8 max-w-md text-lg text-muted">
+          <p
+            className="mt-8 max-w-md text-lg text-muted"
+            data-reveal=""
+            style={stagger(120)}
+          >
             Lo que puedo hacer por tu proyecto.
           </p>
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -222,8 +299,16 @@ export default function Home() {
               return (
                 <li
                   key={s.title}
+                  data-reveal=""
+                  data-reveal-type="pop"
                   className="rounded-[1.75rem] border border-ink/10 p-6 sm:p-7"
-                  style={{ background: c.bg, color: c.fg }}
+                  style={
+                    {
+                      background: c.bg,
+                      color: c.fg,
+                      "--rd": `${i * 120}ms`,
+                    } as CSSProperties
+                  }
                 >
                   <h3 className="font-display text-2xl font-bold leading-tight tracking-tight">
                     {s.title}
@@ -240,10 +325,17 @@ export default function Home() {
         {/* ---------------- Método de trabajo ---------------- */}
         <section id="metodo" className="band-peony scroll-mt-10 bg-peony">
           <div className="mx-auto w-full max-w-6xl px-6 py-24 sm:py-32">
-            <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+            <h2
+              className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl"
+              data-reveal=""
+            >
               <span className="selected">mi método</span>
             </h2>
-            <p className="mb-12 mt-8 max-w-md text-lg text-muted">
+            <p
+              className="mb-12 mt-8 max-w-md text-lg text-muted"
+              data-reveal=""
+              style={stagger(120)}
+            >
               Cada día de la semana es un paso. Pulsa uno para ver qué pasa y qué
               recibes.
             </p>
@@ -256,10 +348,17 @@ export default function Home() {
           id="proyectos"
           className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 py-24 sm:py-32"
         >
-          <h2 className="mb-4 font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+          <h2
+            className="mb-4 font-display text-5xl font-extrabold tracking-tight sm:text-7xl"
+            data-reveal=""
+          >
             <span className="selected">proyectos</span>
           </h2>
-          <p className="mb-10 mt-6 max-w-md text-lg text-muted">
+          <p
+            className="mb-10 mt-6 max-w-md text-lg text-muted"
+            data-reveal=""
+            style={stagger(120)}
+          >
             Cada carpeta es un proyecto. Ábrela para ver de qué trata.
           </p>
           <Desktop projects={projects} />
@@ -269,40 +368,56 @@ export default function Home() {
         <section id="contacto" className="band-peony scroll-mt-10 bg-peony">
           {/* el espacio inferior evita que el dock tape el final */}
           <div className="mx-auto w-full max-w-6xl px-6 pb-40 pt-24 text-center">
-          <h2 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-8xl">
-            <span className="selected">hablemos</span>
-            <br />
-            <span className="selected mt-5">de tu proyecto</span>
-          </h2>
-          <p className="mx-auto mt-10 max-w-md text-lg text-muted">
-            Cuéntame qué necesitas y vemos cómo ayudarte.
-          </p>
-
-          <p className="mt-8 break-words font-display text-2xl font-bold sm:text-3xl">
-            <a
-              href={`mailto:${profile.email}`}
-              className="underline decoration-sel decoration-4 underline-offset-8 transition-colors hover:text-sel"
+            <h2
+              className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-8xl"
+              data-reveal=""
             >
-              {profile.email}
-            </a>
-          </p>
+              <span className="selected">hablemos</span>
+              <br />
+              <span className="selected mt-5">de tu proyecto</span>
+            </h2>
+            <p
+              className="mx-auto mt-10 max-w-md text-lg text-muted"
+              data-reveal=""
+              style={stagger(150)}
+            >
+              Cuéntame qué necesitas y vemos cómo ayudarte.
+            </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <CopyEmail email={profile.email} />
-            {profile.links.map((l) => (
+            <p
+              className="mt-8 break-words font-display text-2xl font-bold sm:text-3xl"
+              data-reveal=""
+              style={stagger(250)}
+            >
               <a
-                key={l.label}
-                href={l.href}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-ink/20 px-5 py-3 font-medium transition-colors hover:border-sel hover:text-sel"
+                href={`mailto:${profile.email}`}
+                className="underline decoration-sel decoration-4 underline-offset-8 transition-colors hover:text-sel"
               >
-                {l.label} ↗
+                {profile.email}
               </a>
-            ))}
-          </div>
+            </p>
 
-          <p className="mt-20 text-sm text-muted">© 2026 {profile.name}</p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <div data-reveal="" data-reveal-type="pop" style={stagger(350)}>
+                <CopyEmail email={profile.email} />
+              </div>
+              {profile.links.map((l, i) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-reveal=""
+                  data-reveal-type="pop"
+                  style={stagger(430 + i * 80)}
+                  className="rounded-full border border-ink/20 px-5 py-3 font-medium transition-colors hover:border-sel hover:text-sel"
+                >
+                  {l.label} ↗
+                </a>
+              ))}
+            </div>
+
+            <p className="mt-20 text-sm text-muted">© 2026 {profile.name}</p>
           </div>
         </section>
       </main>

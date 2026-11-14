@@ -184,10 +184,14 @@ export function Desktop({ projects }: { projects: Project[] }) {
             onPointerCancel={folderUp}
             onClick={() => folderClick(i)}
             className="folder group flex flex-col items-center text-center md:absolute md:left-[var(--fx)] md:top-[var(--fy)] md:w-36 md:touch-none"
+            data-reveal=""
+            data-reveal-type="pop"
             style={
               {
                 "--fx": `${pos[i].x}%`,
                 "--fy": `${pos[i].y}%`,
+                // Las carpetas caen una tras otra cuando el escritorio llega a pantalla
+                "--rd": `${i * 130}ms`,
               } as CSSProperties
             }
           >

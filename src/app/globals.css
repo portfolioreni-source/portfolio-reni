@@ -80,7 +80,10 @@ label,
   /* aire arriba y abajo para que no se corten acentos ni letras largas */
   padding: 0.1em 0.28em 0.14em;
   line-height: 1.1;
-  background: var(--peony);
+  /* El color va como degradado para poder "pintarlo" de izquierda a derecha */
+  --sel-bg: var(--peony);
+  background: linear-gradient(var(--sel-bg), var(--sel-bg)) left center / 100% 100%
+    no-repeat;
 }
 /* Cada tirador es una barra con un punto en un extremo. La caja del tirador
    sobresale lo suficiente para que el punto se dibuje completo, sin cortarse. */
@@ -111,7 +114,7 @@ label,
 
 /* En la banda rosa el resaltado es crema, para que se note */
 .band-peony .selected {
-  background: var(--paper);
+  --sel-bg: var(--paper);
 }
 /* El peony nuevo es más oscuro: el texto secundario pasa a burgundy para leerse bien */
 .band-peony {
@@ -277,6 +280,102 @@ label,
   75% {
     transform: translateY(-3px) rotate(3deg);
   }
+}
+
+/* ---------- Movimiento al hacer scroll ----------
+   ScrollEffects pone data-reveal="hidden" a lo que aún no se ve y "in" cuando
+   llega. Las animaciones usan "backwards" para no dejar rastro cuando acaban. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="hidden"] {
+    opacity: 0;
+  }
+  [data-reveal="in"] {
+    animation: reveal-up 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: var(--rd, 0ms);
+  }
+  [data-reveal="in"][data-reveal-type="pop"] {
+    animation: reveal-pop 0.7s cubic-bezier(0.3, 1.35, 0.5, 1) backwards;
+    animation-delay: var(--rd, 0ms);
+  }
+  [data-reveal="in"][data-reveal-type="left"] {
+    animation: reveal-left 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: var(--rd, 0ms);
+  }
+
+  /* Títulos: el resaltado se pinta de izquierda a derecha y los tiradores
+     aparecen de golpe al final, como cuando seleccionas texto. */
+  [data-reveal="hidden"] .selected {
+    background-size: 0% 100%;
+  }
+  [data-reveal="hidden"] .selected::before,
+  [data-reveal="hidden"] .selected::after {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  [data-reveal="in"] .selected {
+    transition: background-size 0.8s cubic-bezier(0.6, 0, 0.2, 1) 0.25s;
+  }
+  [data-reveal="in"] .selected::before,
+  [data-reveal="in"] .selected::after {
+    transition:
+      opacity 0.25s ease 0.85s,
+      transform 0.45s cubic-bezier(0.3, 1.7, 0.5, 1) 0.85s;
+  }
+
+  /* Parallax de la portada: cada capa se mueve a su ritmo al bajar.
+     Usa "translate" para no chocar con las animaciones de "transform". */
+  .parallax {
+    translate: 0 calc(var(--sy, 0) * var(--ps, 0.1) * 1px);
+    will-change: translate;
+  }
+
+  /* Cinta de palabras que no para de moverse */
+  .marquee-track {
+    animation: marquee 32s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+}
+@keyframes reveal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.82);
+  }
+}
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Cinta de palabras entre la portada y el resto */
+.marquee {
+  overflow: hidden;
+  background: var(--burgundy);
+  color: var(--peony);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+/* Barra fina de progreso bajo la barra de menú */
+.scroll-progress {
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left;
 }
 
 @media (prefers-reduced-motion: reduce) {
