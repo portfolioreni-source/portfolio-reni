@@ -280,13 +280,18 @@ export default function Home() {
               <span className="selected">mi método</span>
             </h2>
             <p
-              className="mb-12 mt-8 max-w-md text-lg text-muted"
+              className="mb-12 mt-8 max-w-xl text-lg text-muted"
               data-reveal=""
               style={stagger(120)}
             >
-              Cada día de la semana es un paso. Tocá cada uno para conocer más
-              sobre esa etapa.
-              <span className="mt-3 block text-base">
+              <span className="block text-xl font-semibold leading-snug text-ink sm:text-2xl">
+                Cada día de la semana es un paso.{" "}
+                <span className="whitespace-nowrap underline decoration-fuchsia decoration-[3px] underline-offset-[6px]">
+                  Tocá cada uno
+                </span>{" "}
+                para conocer más sobre esa etapa.
+              </span>
+              <span className="mt-4 block text-base">
                 Es una representación: la duración de cada proyecto y de cada
                 etapa se define a medida, según lo que el proyecto necesite.
               </span>
