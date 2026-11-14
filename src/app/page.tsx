@@ -229,7 +229,7 @@ export default function Home() {
           <h2 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-8xl">
             <span className="selected">hablemos</span>
             <br />
-            <span className="selected mt-3">de tu proyecto</span>
+            <span className="selected mt-5">de tu proyecto</span>
           </h2>
           <p className="mx-auto mt-10 max-w-md text-lg text-muted">
             Cuéntame qué necesitas y vemos cómo ayudarte.
