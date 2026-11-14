@@ -10,7 +10,8 @@ import {
   type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from "react";
-import type { Project, ProjectColor } from "@/data/portfolio";
+import { allImages, type Project, type ProjectColor } from "@/data/portfolio";
+import imageSizes from "@/data/project-images.json";
 import { FolderIcon } from "./FolderIcon";
 
 // Cada color de etiqueta lleva su color de texto, para que siempre se lea bien.
@@ -24,14 +25,42 @@ const tagColors: Record<ProjectColor, { bg: string; fg: string }> = {
 const tagVars = (c: ProjectColor) =>
   ({ "--tag-bg": tagColors[c].bg, "--tag-fg": tagColors[c].fg }) as CSSProperties;
 
-const WIN_W = 640;
+// Tamaño real de cada imagen, para reservar su lugar antes de que cargue.
+const sizes = imageSizes as unknown as Record<string, [number, number]>;
+const dims = (src: string) => sizes[src] ?? [1600, 1200];
+const isVideo = (src: string) => src.endsWith(".mp4");
+
+function Video({ src, className }: { src: string; className?: string }) {
+  const [w, h] = dims(src);
+  return (
+    <video
+      src={asset(src)}
+      poster={asset(src.replace(/\.mp4$/, ".jpg"))}
+      width={w}
+      height={h}
+      controls
+      playsInline
+      preload="none"
+      className={className}
+    />
+  );
+}
+
+const WIN_W = 760;
+// Posición inicial de cada carpeta (en % del escritorio): tres filas un poco desordenadas.
 const spots = [
-  [6, 8],
-  [34, 44],
-  [60, 6],
-  [74, 48],
-  [14, 62],
-  [46, 70],
+  [4, 4],
+  [28, 9],
+  [52, 3],
+  [76, 8],
+  [14, 36],
+  [40, 33],
+  [64, 38],
+  [86, 32],
+  [3, 66],
+  [30, 64],
+  [56, 68],
+  [80, 66],
 ];
 function spot(i: number): [number, number] {
   const s = spots[i];
@@ -46,6 +75,8 @@ const isDesktopViewport = () =>
 export function Desktop({ projects }: { projects: Project[] }) {
   const [wins, setWins] = useState<Win[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
+  // Imagen ampliada: proyecto e índice dentro de sus imágenes
+  const [zoom, setZoom] = useState<{ p: number; i: number } | null>(null);
   const [pos, setPos] = useState(() =>
     projects.map((_, i) => ({ x: spot(i)[0], y: spot(i)[1] })),
   );
@@ -61,16 +92,35 @@ export function Desktop({ projects }: { projects: Project[] }) {
     requestAnimationFrame(() => document.getElementById(`folder-${id}`)?.focus());
   }, []);
 
+  // Tocar afuera de las ventanas las cierra (salvo al tocar una carpeta o la imagen ampliada)
+  useEffect(() => {
+    if (wins.length === 0 || zoom) return;
+    const onDown = (e: PointerEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest('section[role="dialog"], .folder, [aria-modal="true"]')) return;
+      setWins([]);
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, [wins.length, zoom]);
+
   // Escape cierra la ventana que está encima
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (zoom) {
+        const n = allImages(projects[zoom.p]).length;
+        if (e.key === "Escape") setZoom(null);
+        if (e.key === "ArrowRight") setZoom({ ...zoom, i: (zoom.i + 1) % n });
+        if (e.key === "ArrowLeft") setZoom({ ...zoom, i: (zoom.i - 1 + n) % n });
+        return;
+      }
       if (e.key !== "Escape" || wins.length === 0) return;
       const top = wins.reduce((a, b) => (a.z > b.z ? a : b));
       close(top.id);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [wins, close]);
+  }, [wins, close, zoom, projects]);
 
   function open(id: number) {
     const z = ++zCounter.current;
@@ -170,7 +220,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
         onClick={(e) => {
           if (e.target === e.currentTarget) setSelected(null);
         }}
-        className="desk-surface relative grid grid-cols-2 gap-x-4 gap-y-10 rounded-[2rem] border border-ink/10 p-6 sm:grid-cols-3 md:block md:h-[640px] md:p-0"
+        className="desk-surface relative grid grid-cols-3 gap-x-2 gap-y-8 rounded-[2rem] border border-ink/10 px-3 py-6 sm:grid-cols-4 sm:gap-x-4 sm:p-6 md:block md:h-[720px] md:p-0"
       >
         {projects.map((p, i) => (
           <button
@@ -184,21 +234,25 @@ export function Desktop({ projects }: { projects: Project[] }) {
             onPointerUp={folderUp}
             onPointerCancel={folderUp}
             onClick={() => folderClick(i)}
-            className="folder group flex flex-col items-center text-center md:absolute md:left-[var(--fx)] md:top-[var(--fy)] md:w-36 md:touch-none"
+            className="folder group flex flex-col items-center text-center [--rd:var(--rd-m)] sm:[--rd:var(--rd-s)] md:[--rd:var(--rd-d)] md:absolute md:left-[var(--fx)] md:top-[var(--fy)] md:w-36 md:touch-none"
             data-reveal=""
             data-reveal-type="pop"
             style={
               {
                 "--fx": `${pos[i].x}%`,
                 "--fy": `${pos[i].y}%`,
-                // Las carpetas caen una tras otra cuando el escritorio llega a pantalla
-                "--rd": `${i * 130}ms`,
+                // Las carpetas caen una tras otra cuando llegan a pantalla. En la grilla
+                // (celular) la espera depende de la columna, así cada fila entra junta y
+                // las últimas no llegan tarde; en el escritorio grande, en cascada corta.
+                "--rd-m": `${(i % 3) * 120}ms`,
+                "--rd-s": `${(i % 4) * 120}ms`,
+                "--rd-d": `${Math.min(i * 70, 700)}ms`,
               } as CSSProperties
             }
           >
-            <FolderIcon className="folder-icon w-24 drop-shadow-[0_8px_10px_rgba(121,0,46,0.22)] md:w-28" />
+            <FolderIcon className="folder-icon w-20 drop-shadow-[0_8px_10px_rgba(121,0,46,0.22)] sm:w-24 md:w-28" />
             <span
-              className="folder-label mt-2 rounded-md px-2 py-0.5 text-sm font-semibold"
+              className="folder-label mt-2 rounded-md px-1.5 py-0.5 text-xs font-semibold leading-snug sm:px-2 sm:text-sm"
               style={tagVars(p.color)}
             >
               {p.title}
@@ -278,30 +332,16 @@ export function Desktop({ projects }: { projects: Project[] }) {
 
             {!w.shaded && (
               <div className="min-h-0 flex-1 overflow-y-auto">
-                <div className="hatch relative aspect-[2/1]">
-                  {p.image ? (
-                    <Image
-                      src={asset(p.image)}
-                      alt={`Imagen del proyecto ${p.title}`}
-                      fill
-                      sizes="(min-width: 768px) 640px, 100vw"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <span className="absolute inset-0 grid place-items-center text-xs uppercase tracking-widest text-sel/70">
-                      Imagen del proyecto
-                    </span>
-                  )}
-                </div>
+                <Shot project={p} pi={w.id} i={0} onZoom={setZoom} cover />
 
                 <div className="p-6">
                   <div className="flex items-baseline justify-between gap-4">
                     <h3 className="font-display text-3xl font-extrabold tracking-tight">
                       {p.title}
                     </h3>
-                    <span className="text-sm text-muted">{p.year}</span>
+                    {p.year && <span className="text-sm text-muted">{p.year}</span>}
                   </div>
-                  <p className="mt-1 text-sm font-medium text-sel">{p.role}</p>
+                  {p.kind && <p className="mt-1 text-sm font-medium text-sel">{p.kind}</p>}
                   <p className="mt-4 max-w-prose text-lg leading-relaxed text-muted">
                     {p.summary}
                   </p>
@@ -321,36 +361,208 @@ export function Desktop({ projects }: { projects: Project[] }) {
                     ))}
                   </ul>
 
-                  {(p.href || p.repo) && (
-                    <p className="mt-6 flex flex-wrap gap-3">
-                      {p.href && (
-                        <a
-                          href={p.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-sel"
-                        >
-                          Ver web ↗
-                        </a>
-                      )}
-                      {p.repo && (
-                        <a
-                          href={p.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="rounded-full border border-ink/20 px-5 py-2.5 text-sm font-medium transition-colors hover:border-sel hover:text-sel"
-                        >
-                          Código ↗
-                        </a>
-                      )}
+                  {p.href && (
+                    <p className="mt-6">
+                      <a
+                        href={p.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-sel"
+                      >
+                        {p.hrefLabel ?? "Ver más"} ↗
+                      </a>
                     </p>
                   )}
                 </div>
+
+                <Gallery project={p} pi={w.id} onZoom={setZoom} />
               </div>
             )}
           </section>
         );
       })}
+      {zoom && (
+        <Lightbox
+          project={projects[zoom.p]}
+          i={zoom.i}
+          onMove={(i) => setZoom({ ...zoom, i })}
+          onClose={() => setZoom(null)}
+        />
+      )}
+    </>
+  );
+}
+
+/* ---------- Una imagen de la galería: al tocarla se amplía ---------- */
+function Shot({
+  project,
+  pi,
+  i,
+  onZoom,
+  cover = false,
+}: {
+  project: Project;
+  pi: number;
+  i: number;
+  onZoom: (z: { p: number; i: number }) => void;
+  cover?: boolean;
+}) {
+  const src = allImages(project)[i];
+  const [w, h] = dims(src);
+  if (isVideo(src))
+    return <Video src={src} className={`block h-auto w-full bg-ink ${cover ? "" : "rounded-xl"}`} />;
+  return (
+    <button
+      type="button"
+      onClick={() => onZoom({ p: pi, i })}
+      aria-label={`Ampliar imagen ${i + 1} de ${project.title}`}
+      className={`group block w-full overflow-hidden bg-surface ${cover ? "" : "rounded-xl"}`}
+    >
+      <Image
+        src={asset(src)}
+        alt=""
+        width={w}
+        height={h}
+        sizes={cover ? "(min-width: 768px) 760px, 100vw" : "(min-width: 768px) 360px, 50vw"}
+        loading={cover ? "eager" : "lazy"}
+        className={`h-auto w-full transition-transform duration-300 group-hover:scale-[1.03] ${
+          cover ? "max-h-[70vh] object-contain" : ""
+        }`}
+      />
+    </button>
+  );
+}
+
+/* ---------- Vista ampliada, con flechas para pasar de imagen ---------- */
+function Lightbox({
+  project,
+  i,
+  onMove,
+  onClose,
+}: {
+  project: Project;
+  i: number;
+  onMove: (i: number) => void;
+  onClose: () => void;
+}) {
+  const all = allImages(project);
+  const n = all.length;
+  const src = all[i];
+  const [w, h] = dims(src);
+  const arrow =
+    "grid size-11 place-items-center rounded-full bg-paper/90 text-xl font-bold text-ink shadow-lg transition-colors hover:bg-orange hover:text-white";
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.title}, imagen ${i + 1} de ${n}`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-[9000] flex items-center justify-center bg-[rgba(18,18,22,0.88)] p-4 md:p-10"
+    >
+      {isVideo(src) ? (
+        <Video
+          key={src}
+          src={src}
+          className="pop max-h-full w-auto max-w-full rounded-lg bg-ink shadow-2xl"
+        />
+      ) : (
+        <Image
+          key={src}
+          src={asset(src)}
+          alt={`${project.title}, imagen ${i + 1} de ${n}`}
+          width={w}
+          height={h}
+          sizes="100vw"
+          className="pop max-h-full w-auto max-w-full rounded-lg object-contain shadow-2xl"
+        />
+      )}
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Cerrar imagen"
+        autoFocus
+        className={`${arrow} absolute right-4 top-4`}
+      >
+        ×
+      </button>
+      {n > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => onMove((i - 1 + n) % n)}
+            aria-label="Imagen anterior"
+            className={`${arrow} absolute left-3 top-1/2 -translate-y-1/2 md:left-6`}
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            onClick={() => onMove((i + 1) % n)}
+            aria-label="Imagen siguiente"
+            className={`${arrow} absolute right-3 top-1/2 -translate-y-1/2 md:right-6`}
+          >
+            →
+          </button>
+          <p className="absolute bottom-4 left-0 right-0 text-center text-sm font-medium text-white/80">
+            {i + 1} / {n}
+          </p>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ---------- Galería: videos a lo ancho, imágenes en dos columnas, y partes con subtítulo ---------- */
+function Gallery({
+  project,
+  pi,
+  onZoom,
+}: {
+  project: Project;
+  pi: number;
+  onZoom: (z: { p: number; i: number }) => void;
+}) {
+  // Índices dentro de la lista completa; el 0 es la portada y ya se mostró arriba.
+  const groups: { title?: string; idx: number[] }[] = [];
+  let at = 0;
+  for (const g of [{ images: project.images }, ...(project.sections ?? [])]) {
+    const idx = g.images.map((_, k) => at + k).filter((i) => i > 0);
+    at += g.images.length;
+    if (idx.length) groups.push({ title: "title" in g ? g.title : undefined, idx });
+  }
+  const all = allImages(project);
+
+  return (
+    <>
+      {groups.map((g, gi) => (
+        <div key={gi} className="pb-3">
+          {g.title && (
+            <h4 className="mx-6 mb-4 mt-4 border-t border-ink/10 pt-6 font-display text-xl font-extrabold tracking-tight">
+              {g.title}
+            </h4>
+          )}
+          {g.idx
+            .filter((i) => isVideo(all[i]))
+            .map((i) => (
+              <div key={i} className="px-6 pb-3">
+                <Shot project={project} pi={pi} i={i} onZoom={onZoom} />
+              </div>
+            ))}
+          <div
+            className={`gap-3 px-6 [&>*]:mb-3 ${
+              g.idx.filter((i) => !isVideo(all[i])).length > 1 ? "columns-2" : ""
+            }`}
+          >
+            {g.idx
+              .filter((i) => !isVideo(all[i]))
+              .map((i) => (
+                <Shot key={i} project={project} pi={pi} i={i} onZoom={onZoom} />
+              ))}
+          </div>
+        </div>
+      ))}
     </>
   );
 }

@@ -170,55 +170,140 @@ export const method: MethodStep[] = [
 // Colores disponibles para las etiquetas de cada proyecto.
 export type ProjectColor = "peony" | "pistachio" | "burgundy" | "fuchsia";
 
+// BORRADOR: los textos de cada proyecto los escribí a partir de las imágenes.
+// Corregilos con tus palabras y agregá el año ("year") cuando lo tengas.
+//
+// Imágenes: van en /public/proyectos/<carpeta>/ y se listan en "images".
+// La primera es la portada de la ventana. También acepta videos .mp4
+// (con una imagen .jpg del mismo nombre como vista previa). Si agregás imágenes nuevas, hay que
+// sumar su tamaño en src/data/project-images.json (pedímelo y lo hago).
 export type Project = {
   title: string;
-  year: string;
-  role: string;
+  kind?: string; // tipo de trabajo, se muestra debajo del título (opcional)
+  year?: string;
   summary: string;
   tags: string[];
   color: ProjectColor; // color de la etiqueta de la carpeta
-  image?: string; // por ejemplo "/projects/uno.jpg"
-  href?: string; // enlace a la web en vivo
-  repo?: string; // enlace al código
+  images: string[];
+  // Opcional: partes de la galería con su subtítulo, que se muestran después de "images".
+  sections?: { title: string; images: string[] }[];
+  href?: string; // enlace opcional (por ejemplo, Behance o la web del cliente)
+  hrefLabel?: string; // texto del botón del enlace (si no, dice "Ver más")
 };
+
+const imgs = (folder: string, n: number) =>
+  Array.from({ length: n }, (_, i) => `/proyectos/${folder}/${String(i + 1).padStart(2, "0")}.jpg`);
 
 export const projects: Project[] = [
   {
-    title: "Proyecto uno",
-    year: "2026",
-    role: "Diseño y desarrollo",
+    title: "Centro Cultural Federico Leloir",
+    kind: "Identidad visual y campaña",
     summary:
-      "Describí en una o dos frases qué problema resolvía y qué cambió gracias a tu trabajo.",
-    tags: ["Next.js", "UX"],
+      "Identidad para un centro cultural de ciencia: logo, cartelería, afiches, agenda, revista, postales y piezas para redes. Un sistema atractivo para que la juventud se divierta con la ciencia.",
+    tags: ["Sistema", "Logo", "Afiche", "Editorial", "Redes", "Identidad visual"],
     color: "fuchsia",
-    href: "https://ejemplo.com",
-    repo: "https://github.com/tu-usuario/proyecto-uno",
+    images: imgs("leloir", 24),
   },
   {
-    title: "Proyecto dos",
-    year: "2025",
-    role: "Diseño de interfaz",
+    title: "A un paso(té) del cielo",
+    kind: "Diseño editorial y collage",
     summary:
-      "Otra descripción breve. Contá el resultado, no solo las herramientas que usaste.",
-    tags: ["UI", "Figma"],
-    color: "pistachio",
-    repo: "https://github.com/tu-usuario/proyecto-dos",
-  },
-  {
-    title: "Proyecto tres",
-    year: "2025",
-    role: "Identidad y web",
-    summary: "Un tercer proyecto. Podés borrar los que no uses o añadir más.",
-    tags: ["Marca", "Web"],
+      "Libro cuadrado ilustrado con collage, pensado para mostrar el juego y las posibilidades de imaginación a través del collage. También se realizó el afiche de lanzamiento.",
+    tags: ["Libro", "Collage", "Afiche"],
     color: "peony",
-    href: "https://ejemplo.com",
+    images: (() => {
+      // El video de presentación va justo después de la tapa
+      const all = imgs("merienda", 10);
+      return [all[0], "/proyectos/merienda/video.mp4", ...all.slice(1)];
+    })(),
   },
   {
-    title: "Proyecto cuatro",
-    year: "2024",
-    role: "Investigación y prototipo",
-    summary: "Un cuarto proyecto, para que el escritorio no se vea vacío.",
-    tags: ["Research", "Prototipo"],
-    color: "burgundy",
+    title: "Paula Scher",
+    kind: "Diseño editorial",
+    summary: "Diseño de tres piezas editoriales: librito biográfico, diario y cronograma.",
+    tags: ["Editorial", "Libro", "Tipografía", "Diario"],
+    color: "pistachio",
+    images: imgs("paula-scher", 16),
   },
+  {
+    title: "Tostado Café Club",
+    kind: "Menú",
+    summary: "Menú en formato libro para una cafetería porteña.",
+    tags: ["Editorial", "Gastronomía", "Menú", "Imagen"],
+    color: "burgundy",
+    images: imgs("tostado", 19),
+  },
+  {
+    title: "Fascículo barrial",
+    kind: "Editorial y fotografía",
+    summary: "Fascículo sobre el barrio de Belgrano con producción de fotografía propia. También se realizó el afiche de lanzamiento.",
+    tags: ["Fascículo", "Fotografía", "Editorial", "Afiche"],
+    color: "pistachio",
+    // La portada es un mockup del fascículo; después vienen las dos partes.
+    images: ["/proyectos/belgrano/portada.jpg"],
+    sections: [
+      { title: "Producción fotográfica", images: imgs("belgrano/fotos", 20) },
+      { title: "Fascículo", images: imgs("belgrano/fasciculo", 9) },
+      { title: "Afiche de lanzamiento", images: ["/proyectos/belgrano/afiche.jpg"] },
+    ],
+  },
+  {
+    title: "Sara Kerr",
+    kind: "Diseño digital",
+    summary:
+      "Realización de actualizaciones web cada 15 días, sistema de identidad para la temporada verano 2027, manejo de redes, afiches de vía pública y cartelería del local.",
+    tags: ["Banners", "E-commerce", "Redes", "Vía pública", "Identidad"],
+    color: "peony",
+    images: imgs("sara-kerr", 6),
+  },
+  {
+    title: "Farmasut",
+    kind: "Diseño digital",
+    summary:
+      "Actualización web cada 15 días, manejo y diseño de redes, y cartelería para eventos.",
+    tags: ["Banners", "E-commerce", "Promoción", "Redes", "Cartelería"],
+    color: "fuchsia",
+    images: imgs("farmasut", 2),
+  },
+  {
+    title: "Producción fotográfica Romance",
+    kind: "Producción fotográfica",
+    summary:
+      "Producción de fotos para una colección de diseño de indumentaria: locación, dirección de las modelos y fotografía.",
+    tags: ["Fotografía", "Moda"],
+    color: "burgundy",
+    images: imgs("indumentaria", 13),
+  },
+  {
+    title: "Producción fotográfica retro",
+    kind: "Producción fotográfica",
+    summary: "Producción de fotos de moda: fotografía nocturna con estética retro.",
+    tags: ["Fotografía", "Retrato", "Producción de moda"],
+    color: "peony",
+    images: imgs("retro", 7),
+  },
+  {
+    title: "Afiches",
+    summary: "Diseño de afiches, trabajo de imagen propia.",
+    tags: ["Afiches", "Imagen", "Tipografía"],
+    color: "pistachio",
+    images: imgs("afiches", 4),
+  },
+  {
+    title: "Acuna",
+    kind: "Marca y diseño de app",
+    summary:
+      "Acuna App acompaña el embarazo semana a semana: diario, citas médicas, contador de contracciones, checklists, comunidad y un espacio para quien acompaña. Diseñé el logo, la landing y las pantallas de la app, con una estética suave y cálida.",
+    tags: ["App", "UX/UI", "Logo", "Landing"],
+    color: "fuchsia",
+    images: imgs("acuna", 39),
+    href: "https://mamadashboard.vercel.app/",
+    hrefLabel: "Ver la app",
+  },
+];
+
+// Todas las imágenes de un proyecto en orden: las sueltas y después las de cada parte.
+export const allImages = (p: Project) => [
+  ...p.images,
+  ...(p.sections ?? []).flatMap((s) => s.images),
 ];

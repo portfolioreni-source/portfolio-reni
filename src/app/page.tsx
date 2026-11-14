@@ -316,7 +316,9 @@ export default function Home() {
             data-reveal=""
             style={stagger(120)}
           >
-            Cada carpeta es un proyecto. Abrila para ver de qué trata.
+            Cada carpeta es un proyecto.
+            <br />
+            Abrila para ver de qué trata.
           </p>
           <Desktop projects={projects} />
         </section>
