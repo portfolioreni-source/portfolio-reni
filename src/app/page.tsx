@@ -288,6 +288,10 @@ export default function Home() {
             >
               Cada día de la semana es un paso. Tocá uno para ver qué pasa y qué
               recibís.
+              <span className="mt-3 block text-base">
+                Es una representación: la duración de cada proyecto y de cada
+                etapa se define a medida, según lo que el proyecto necesite.
+              </span>
             </p>
             <Method steps={method} />
           </div>
