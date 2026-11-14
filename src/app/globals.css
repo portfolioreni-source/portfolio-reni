@@ -156,13 +156,15 @@ body {
 .dock-item:focus-visible .dock-tip {
   opacity: 1;
 }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+@media (hover: hover) and (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+  /* El zoom no mueve a los vecinos, así que el hueco entre iconos (gap del dock)
+     debe ser mayor que lo que crecen: (1.4-1)*24 + (1.15-1)*24 = 13px. */
   .dock-item:hover {
-    transform: scale(1.5) translateY(-4px);
+    transform: scale(1.4) translateY(-6px);
   }
   .dock-item:hover + .dock-item,
   .dock-item:has(+ .dock-item:hover) {
-    transform: scale(1.22) translateY(-2px);
+    transform: scale(1.15) translateY(-2px);
   }
 }
 

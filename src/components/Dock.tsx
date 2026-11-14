@@ -28,7 +28,7 @@ export function Dock() {
   return (
     <nav
       aria-label="Dock"
-      className="fixed bottom-3 left-1/2 z-50 flex -translate-x-1/2 items-end gap-2.5 rounded-[1.4rem] border border-white/70 bg-paper/60 px-3 py-2.5 shadow-[0_10px_40px_-10px_rgba(119,5,35,0.4)] backdrop-blur-xl"
+      className="fixed bottom-3 left-1/2 z-50 flex -translate-x-1/2 items-end gap-2.5 rounded-[1.4rem] sm:gap-4 border border-white/70 bg-paper/60 px-3 py-2.5 shadow-[0_10px_40px_-10px_rgba(119,5,35,0.4)] backdrop-blur-xl"
     >
       {items.map((it) => (
         <a
