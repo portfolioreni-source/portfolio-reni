@@ -13,8 +13,8 @@ export const profile = {
   photo: "/yo-portada.jpg", // foto de la portada (se muestra dentro de un arco, no hace falta recortarla)
   aboutPhoto: "", // foto recortada para "Sobre mí", por ejemplo "/yo-sobre-mi.png"
   about: [
-    "Escribí acá un párrafo sobre vos: qué hacés, cómo trabajás y qué tipo de proyectos buscás.",
-    "Un segundo párrafo, opcional, con algo más personal: qué te inspira o qué te gusta hacer fuera del trabajo.",
+    "¡Hola! Soy Renata, una apasionada de comunicar a través del diseño, los colores, las imágenes, la tipografía y la interacción.",
+    "Me encanta, en cada proyecto, poder acompañar más allá de lo estético: entender el por qué de una necesidad y, con eso, llegar a un resultado que represente.",
   ],
   email: "tu-mail@ejemplo.com",
   // Redes y contacto. Los nombres "LinkedIn", "Instagram" y "WhatsApp" eligen el
@@ -47,7 +47,16 @@ export const marquee = [
   "Moda",
 ];
 
-export const tools =["Figma", "Next.js", "React", "TypeScript", "Tailwind", "Notion"];
+export const tools = [
+  "Illustrator",
+  "Photoshop",
+  "Lightroom",
+  "InDesign",
+  "Canva",
+  "Figma",
+  "CapCut",
+  "Visual Studio Code",
+];
 
 // Habilidades que ofreces (se muestran como tarjetas). Puedes poner las que quieras.
 export type Service = { title: string; description: string };

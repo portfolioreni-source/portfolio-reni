@@ -17,6 +17,7 @@ import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
 import { Method } from "@/components/Method";
 import { ScrollEffects } from "@/components/ScrollEffects";
+import { ToolIcon } from "@/components/ToolIcon";
 
 // Colores de las tarjetas de habilidades (fondo y texto, ya con buen contraste)
 const serviceColors = [
@@ -24,16 +25,6 @@ const serviceColors = [
   { bg: "var(--pistachio)", fg: "var(--burgundy)" },
   { bg: "var(--burgundy)", fg: "var(--peony)" },
   { bg: "#ffffff", fg: "var(--burgundy)" },
-];
-
-// Iconos de app para las herramientas: color de fondo y de texto de cada uno.
-const appColors = [
-  { bg: "var(--fuchsia)", fg: "#ffffff" },
-  { bg: "var(--orange)", fg: "#ffffff" },
-  { bg: "var(--pistachio)", fg: "var(--burgundy)" },
-  { bg: "var(--burgundy)", fg: "var(--peony)" },
-  { bg: "var(--peony)", fg: "var(--burgundy)" },
-  { bg: "var(--fuchsia)", fg: "#ffffff" },
 ];
 
 // Retraso de la animación de entrada de la portada
@@ -107,7 +98,7 @@ export default function Home() {
                   href="#proyectos"
                   className="relative rounded-full bg-ink px-6 py-3 font-semibold text-peony transition-colors hover:bg-orange hover:text-white"
                 >
-                  Abrir proyectos
+                  Ver proyectos
                 </a>
                 <a
                   href="#contacto"
@@ -197,7 +188,7 @@ export default function Home() {
 
               <ul
                 aria-label="Herramientas"
-                className="mx-auto mt-8 flex max-w-sm flex-wrap justify-center gap-2.5 rounded-[1.4rem] bg-surface p-3"
+                className="mx-auto mt-8 grid max-w-sm grid-cols-4 gap-x-2 gap-y-4 rounded-[1.4rem] bg-surface px-3 py-4"
               >
                 {tools.map((t, i) => (
                   <li
@@ -205,17 +196,13 @@ export default function Home() {
                     title={t}
                     data-reveal=""
                     data-reveal-type="pop"
-                    className="grid size-12 place-items-center rounded-[0.85rem] text-sm font-bold shadow-sm"
-                    style={
-                      {
-                        background: appColors[i % appColors.length].bg,
-                        color: appColors[i % appColors.length].fg,
-                        "--rd": `${250 + i * 80}ms`,
-                      } as CSSProperties
-                    }
+                    className="flex flex-col items-center gap-1.5"
+                    style={{ "--rd": `${250 + i * 80}ms` } as CSSProperties}
                   >
-                    <span aria-hidden>{t.slice(0, 2)}</span>
-                    <span className="sr-only">{t}</span>
+                    <ToolIcon name={t} className="size-12" />
+                    <span className="text-center text-[0.68rem] leading-tight text-ink/80">
+                      {t === "Visual Studio Code" ? "VS Code" : t}
+                    </span>
                   </li>
                 ))}
               </ul>
