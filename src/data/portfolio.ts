@@ -27,9 +27,18 @@ export const profile = {
   ],
 };
 
-export const education = [
-  { title: "Tu título o formación", place: "Universidad o escuela, ciudad" },
-  { title: "Un curso o diplomado", place: "Institución, ciudad" },
+// Cada item se muestra como una carpeta. "place" es el subtítulo y es opcional.
+type FolderItem = { title: string; place?: string };
+
+export const education: FolderItem[] = [
+  { title: "Secundario completo", place: "Bachiller especializado en artes" },
+  { title: "Licenciatura en Diseño en Comunicación Visual, Gráfica y Digital" },
+];
+
+export const awards: FolderItem[] = [
+  { title: "Distinción por trayectoria escolar en 5.º año del secundario" },
+  { title: "Mención especial por trayectoria académica en el secundario" },
+  { title: "Mención especial por estar entre los 10 mejores promedios de primer año de la universidad" },
 ];
 
 export const languages = ["Español · nativo", "Inglés · intermedio"];

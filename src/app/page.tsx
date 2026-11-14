@@ -2,6 +2,7 @@ import Image from "next/image";
 import { asset } from "@/lib/asset";
 import type { CSSProperties } from "react";
 import {
+  awards,
   education,
   languages,
   marquee,
@@ -208,25 +209,34 @@ export default function Home() {
                 ))}
               </div>
 
-              <h3 className="mt-12 text-sm font-bold" data-reveal="">
-                Educación
-              </h3>
-              <ul className="mt-4 space-y-4">
-                {education.map((e, i) => (
-                  <li
-                    key={e.title}
-                    data-reveal=""
-                    style={stagger(i * 120)}
-                    className="flex items-center gap-4"
-                  >
-                    <FolderIcon className="w-11 shrink-0" />
-                    <p>
-                      <span className="block font-medium">{e.title}</span>
-                      <span className="text-sm text-muted">{e.place}</span>
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              {[
+                { heading: "Educación", items: education },
+                { heading: "Reconocimientos", items: awards },
+              ].map((group) => (
+                <div key={group.heading}>
+                  <h3 className="mt-12 text-sm font-bold" data-reveal="">
+                    {group.heading}
+                  </h3>
+                  <ul className="mt-4 space-y-4">
+                    {group.items.map((e, i) => (
+                      <li
+                        key={e.title}
+                        data-reveal=""
+                        style={stagger(i * 120)}
+                        className="flex items-center gap-4"
+                      >
+                        <FolderIcon className="w-11 shrink-0" />
+                        <p>
+                          <span className="block font-medium">{e.title}</span>
+                          {e.place && (
+                            <span className="text-sm text-muted">{e.place}</span>
+                          )}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
 
               <h3 className="mt-12 text-sm font-bold" data-reveal="">
                 Idiomas
