@@ -41,7 +41,7 @@ export const awards: FolderItem[] = [
   { title: "Mención especial por estar entre los 10 mejores promedios de primer año de la universidad" },
 ];
 
-export const languages = ["Español · nativo", "Inglés · intermedio"];
+export const languages = ["Español · nativo", "Inglés · C2"];
 
 // Palabras de la cinta que se mueve debajo de la portada.
 export const marquee = [
