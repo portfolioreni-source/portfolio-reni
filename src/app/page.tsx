@@ -26,8 +26,6 @@ import { ToolList } from "@/components/ToolList";
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 // Retraso de la aparición al hacer scroll (para que los elementos entren uno tras otro)
 const stagger = (ms: number) => ({ "--rd": `${ms}ms` }) as CSSProperties;
-// Velocidad del parallax: cuanto mayor, más se desplaza esa capa al bajar
-const speed = (ps: number) => ({ "--ps": ps }) as CSSProperties;
 
 // Palabras de la cinta que se mueve entre la portada y "Sobre mí".
 // Se repiten dos veces para que la cinta nunca deje huecos, ni en pantallas muy anchas.
@@ -54,8 +52,9 @@ export default function Home() {
         >
           <div className="mx-auto grid min-h-[92svh] w-full max-w-6xl items-end gap-4 px-6 pt-20 lg:grid-cols-12">
             <div
-              className="parallax relative z-10 pb-16 lg:col-span-8 lg:pb-28"
-              style={speed(0.07)}
+              // En el celular el texto queda quieto y la foto sube poco, para que
+              // no se pegue a los botones; en pantallas anchas se mueven más.
+              className="parallax relative z-10 pb-16 [--ps:0] lg:col-span-8 lg:pb-28 lg:[--ps:0.07]"
             >
               <p
                 className="rise mb-6 inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm shadow-sm"
@@ -105,8 +104,7 @@ export default function Home() {
             </div>
 
             <div
-              className="parallax relative mx-auto flex w-full max-w-sm items-end justify-center lg:col-span-4 lg:max-w-none"
-              style={speed(-0.08)}
+              className="parallax relative mx-auto flex w-full max-w-sm items-end justify-center [--ps:-0.06] lg:col-span-4 lg:max-w-none lg:[--ps:-0.08]"
             >
               <div
                 className="rise flex w-full items-end justify-center pb-16 lg:pb-24"
@@ -267,7 +265,7 @@ export default function Home() {
             data-reveal=""
             style={stagger(120)}
           >
-            Lo que puedo hacer por tu proyecto. Tocá una tarjeta para ver más.
+            Lo que puedo hacer por tu proyecto.
           </p>
           <Skills services={services} />
         </section>
