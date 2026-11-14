@@ -113,7 +113,9 @@ export function Method({ steps }: { steps: MethodStep[] }) {
                 <span className="order-last grid size-8 shrink-0 place-items-center text-base md:order-none md:self-end">
                   {i + 1}
                 </span>
-                <span className="flex-1 text-sm md:mt-2 md:flex-none">Descanso</span>
+                <span className="flex-1 text-sm md:mt-2 md:flex-none">
+                  {i === 5 ? "Disfrutar el resultado" : "Ver crecer tu proyecto"}
+                </span>
               </div>
             );
           }

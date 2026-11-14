@@ -126,7 +126,7 @@ export const services: Service[] = [
 ];
 
 // Método de trabajo: cada paso ocupa un día del calendario, de lunes a domingo.
-// Con 5 pasos quedan lunes a viernes y el fin de semana se muestra como descanso.
+// Con 5 pasos quedan lunes a viernes y el fin de semana muestra "Disfrutar el resultado" y "Ver crecer tu proyecto".
 // Admite hasta 7 pasos. (Los de abajo son de ejemplo: cámbialos por los tuyos.)
 export type MethodStep = {
   title: string; // nombre corto del paso
