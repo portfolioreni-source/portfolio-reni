@@ -183,7 +183,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
             onPointerUp={folderUp}
             onPointerCancel={folderUp}
             onClick={() => folderClick(i)}
-            className="folder group flex flex-col items-center text-center md:absolute md:left-[var(--fx)] md:top-[var(--fy)] md:w-36 md:cursor-grab md:touch-none md:active:cursor-grabbing"
+            className="folder group flex flex-col items-center text-center md:absolute md:left-[var(--fx)] md:top-[var(--fy)] md:w-36 md:touch-none"
             style={
               {
                 "--fx": `${pos[i].x}%`,
@@ -242,7 +242,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
               onPointerMove={titleMove}
               onPointerUp={titleUp}
               onPointerCancel={titleUp}
-              className="flex select-none items-center gap-2 border-b border-ink/10 bg-surface px-4 py-3 md:cursor-grab md:touch-none"
+              className="flex select-none items-center gap-2 border-b border-ink/10 bg-surface px-4 py-3 cursor-act md:touch-none"
             >
               <div className="flex gap-2">
                 <button

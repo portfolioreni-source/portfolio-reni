@@ -43,6 +43,26 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ---------- Cursor propio ----------
+   Flecha fucsia con borde burgundy y halo blanco (se ve sobre cualquier fondo).
+   Sobre botones, enlaces y carpetas pasa a naranja. Los dos números son el
+   punto exacto que cuenta como "clic" (la punta de la flecha). */
+:root {
+  --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='white' stroke='white' stroke-width='3.4' stroke-linejoin='round'/%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='%23f0087a' stroke='%237a0020' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, auto;
+  --cursor-act: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='white' stroke='white' stroke-width='3.4' stroke-linejoin='round'/%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='%23ff4a14' stroke='%237a0020' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, pointer;
+}
+html {
+  cursor: var(--cursor);
+}
+a,
+button,
+[role="button"],
+summary,
+label,
+.cursor-act {
+  cursor: var(--cursor-act);
+}
+
 ::selection {
   background: var(--sel-soft);
 }
@@ -157,14 +177,27 @@ body {
   opacity: 1;
 }
 @media (hover: hover) and (min-width: 640px) and (prefers-reduced-motion: no-preference) {
-  /* El zoom no mueve a los vecinos, así que el hueco entre iconos (gap del dock)
-     debe ser mayor que lo que crecen: (1.4-1)*24 + (1.15-1)*24 = 13px. */
-  .dock-item:hover {
-    transform: scale(1.4) translateY(-6px);
+  /* Como en el dock de Mac: el icono bajo el cursor se levanta y crece, los
+     vecinos crecen menos y se apartan para dejarle sitio. Se mueven con
+     translateX (no cambian el ancho del dock, así que nada baila bajo el cursor). */
+  .dock {
+    --d1: 10px; /* cuánto se aparta el vecino directo */
+    --d2: 15px; /* cuánto se apartan los demás */
   }
-  .dock-item:hover + .dock-item,
+  .dock-item:hover ~ .dock-item {
+    transform: translateX(var(--d2));
+  }
+  .dock-item:has(~ .dock-item:hover) {
+    transform: translateX(calc(-1 * var(--d2)));
+  }
+  .dock-item:hover + .dock-item {
+    transform: translateX(var(--d1)) translateY(-4px) scale(1.25);
+  }
   .dock-item:has(+ .dock-item:hover) {
-    transform: scale(1.15) translateY(-2px);
+    transform: translateX(calc(-1 * var(--d1))) translateY(-4px) scale(1.25);
+  }
+  .dock-item:hover {
+    transform: translateY(-10px) scale(1.55);
   }
 }
 
@@ -176,9 +209,6 @@ body {
   }
   .pop {
     animation: pop 0.22s cubic-bezier(0.2, 0.8, 0.3, 1) both;
-  }
-  .float {
-    animation: float 3.6s ease-in-out infinite;
   }
   .folder:hover .folder-icon {
     animation: jiggle 0.45s ease-in-out;
@@ -202,15 +232,6 @@ body {
   to {
     opacity: 1;
     transform: none;
-  }
-}
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(8px, -6px);
   }
 }
 @keyframes jiggle {

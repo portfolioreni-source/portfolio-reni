@@ -25,19 +25,6 @@ const appColors = [
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
-function Cursor({ label }: { label: string }) {
-  return (
-    <div aria-hidden className="float pointer-events-none absolute -right-2 top-full z-20 mt-1 hidden sm:block">
-      <svg viewBox="0 0 24 24" className="size-7 drop-shadow" fill="#770523" stroke="#fff" strokeWidth="1.5" strokeLinejoin="round">
-        <path d="M4 3l7 17 2.4-7.2L21 10z" />
-      </svg>
-      <span className="ml-5 -mt-1 inline-block rounded-full bg-ink px-3 py-1 text-xs font-semibold text-peony">
-        {label}
-      </span>
-    </div>
-  );
-}
-
 export default function Home() {
   const nameLines = profile.name.split(" ");
 
@@ -90,7 +77,6 @@ export default function Home() {
                   className="relative rounded-full bg-ink px-6 py-3 font-semibold text-peony transition-colors hover:bg-orange hover:text-white"
                 >
                   Abrir proyectos
-                  <Cursor label={nameLines[0]} />
                 </a>
                 <a
                   href="#contacto"
