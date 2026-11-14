@@ -211,7 +211,7 @@ export default function Home() {
         {/* ---------------- Proyectos ---------------- */}
         <section
           id="proyectos"
-          className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 pb-24 sm:pb-32"
+          className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 py-24 sm:py-32"
         >
           <h2 className="mb-4 font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
             <span className="selected">proyectos</span>
