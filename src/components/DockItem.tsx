@@ -36,10 +36,11 @@ export function DockItem({
 
   return (
     <a
-      href={href}
-      aria-label={external ? `${label} (se abre en otra pestaña)` : label}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
+      // Sin dirección (por ejemplo WhatsApp todavía sin número): se ve pero no lleva a ningún lado
+      href={href || undefined}
+      aria-label={external && href ? `${label} (se abre en otra pestaña)` : label}
+      target={external && href ? "_blank" : undefined}
+      rel={external && href ? "noreferrer" : undefined}
       className={className}
       style={style}
       data-lift={lift}

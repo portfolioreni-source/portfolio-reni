@@ -363,9 +363,9 @@ export default function Home() {
               {profile.links.map((l, i) => (
                 <a
                   key={l.label}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={l.href || undefined}
+                  target={l.href ? "_blank" : undefined}
+                  rel={l.href ? "noreferrer" : undefined}
                   data-reveal=""
                   data-reveal-type="pop"
                   style={stagger(430 + i * 80)}

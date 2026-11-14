@@ -16,14 +16,15 @@ export const profile = {
     "¡Hola! Soy Renata, una apasionada de comunicar a través del diseño, los colores, las imágenes, la tipografía y la interacción.",
     "Me encanta, en cada proyecto, poder acompañar más allá de lo estético: entender el por qué de una necesidad y, con eso, llegar a un resultado que represente.",
   ],
-  email: "tu-mail@ejemplo.com",
+  email: "rekastikadesign@gmail.com",
   // Redes y contacto. Los nombres "LinkedIn", "Instagram" y "WhatsApp" eligen el
   // icono del dock, así que no los cambies; solo cambia las direcciones.
   // WhatsApp: "https://wa.me/" + código de país + número, todo junto y sin + ni espacios.
+  // Si dejás href vacío (""), el botón se ve pero no lleva a ningún lado.
   links: [
-    { label: "LinkedIn", href: "https://linkedin.com/in/tu-usuario" },
-    { label: "Instagram", href: "https://instagram.com/tu-usuario" },
-    { label: "WhatsApp", href: "https://wa.me/00000000000" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/renata-kastika-0a77832b8" },
+    { label: "Instagram", href: "https://www.instagram.com/rekastika.design" },
+    { label: "WhatsApp", href: "" },
   ],
 };
 
