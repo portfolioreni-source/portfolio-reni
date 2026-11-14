@@ -284,8 +284,8 @@ export default function Home() {
               data-reveal=""
               style={stagger(120)}
             >
-              Cada día de la semana es un paso. Tocá uno para ver qué pasa y qué
-              recibís.
+              Cada día de la semana es un paso. Tocá cada uno para conocer más
+              sobre esa etapa.
               <span className="mt-3 block text-base">
                 Es una representación: la duración de cada proyecto y de cada
                 etapa se define a medida, según lo que el proyecto necesite.
