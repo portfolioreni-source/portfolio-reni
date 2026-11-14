@@ -46,9 +46,9 @@ export function Method({ steps }: { steps: MethodStep[] }) {
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/10 px-5 py-4">
         <div className="flex items-center gap-4">
           <div aria-hidden className="flex gap-2">
-            <span className="size-3 rounded-full bg-[#ff5f57]" />
-            <span className="size-3 rounded-full bg-[#febc2e]" />
-            <span className="size-3 rounded-full bg-[#28c840]" />
+            <span className="size-3 rounded-full bg-fuchsia" />
+            <span className="size-3 rounded-full bg-orange" />
+            <span className="size-3 rounded-full bg-pistachio" />
           </div>
           <h3 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
             Mi método de trabajo

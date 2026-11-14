@@ -19,15 +19,8 @@ import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
 import { Method } from "@/components/Method";
 import { ScrollEffects } from "@/components/ScrollEffects";
+import { Skills } from "@/components/Skills";
 import { ToolList } from "@/components/ToolList";
-
-// Colores de las tarjetas de habilidades (fondo y texto, ya con buen contraste)
-const serviceColors = [
-  { bg: "var(--peony)", fg: "var(--burgundy)" },
-  { bg: "var(--pistachio)", fg: "var(--burgundy)" },
-  { bg: "var(--burgundy)", fg: "var(--peony)" },
-  { bg: "#ffffff", fg: "var(--burgundy)" },
-];
 
 // Retraso de la animación de entrada de la portada
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
@@ -274,35 +267,9 @@ export default function Home() {
             data-reveal=""
             style={stagger(120)}
           >
-            Lo que puedo hacer por tu proyecto.
+            Lo que puedo hacer por tu proyecto. Tocá una tarjeta para ver más.
           </p>
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s, i) => {
-              const c = serviceColors[i % serviceColors.length];
-              return (
-                <li
-                  key={s.title}
-                  data-reveal=""
-                  data-reveal-type="pop"
-                  className="rounded-[1.75rem] border border-ink/10 p-6 sm:p-7"
-                  style={
-                    {
-                      background: c.bg,
-                      color: c.fg,
-                      "--rd": `${i * 120}ms`,
-                    } as CSSProperties
-                  }
-                >
-                  <h3 className="font-display text-2xl font-bold leading-tight tracking-tight">
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-relaxed opacity-85">
-                    {s.description}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
+          <Skills services={services} />
         </section>
 
         {/* ---------------- Método de trabajo ---------------- */}

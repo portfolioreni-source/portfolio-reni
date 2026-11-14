@@ -254,21 +254,21 @@ export function Desktop({ projects }: { projects: Project[] }) {
                   type="button"
                   aria-label="Cerrar ventana"
                   onClick={() => close(w.id)}
-                  className="size-3.5 rounded-full bg-[#ff5f57] ring-1 ring-black/10 hover:brightness-90"
+                  className="size-3.5 rounded-full bg-fuchsia ring-1 ring-black/10 hover:brightness-90"
                 />
                 <button
                   type="button"
                   aria-label={w.shaded ? "Mostrar contenido" : "Ocultar contenido"}
                   aria-pressed={w.shaded}
                   onClick={() => patch(w.id, { shaded: !w.shaded })}
-                  className="size-3.5 rounded-full bg-[#febc2e] ring-1 ring-black/10 hover:brightness-90"
+                  className="size-3.5 rounded-full bg-orange ring-1 ring-black/10 hover:brightness-90"
                 />
                 <button
                   type="button"
                   aria-label={w.wide ? "Reducir ventana" : "Ampliar ventana"}
                   aria-pressed={w.wide}
                   onClick={() => patch(w.id, { wide: !w.wide })}
-                  className="hidden size-3.5 rounded-full bg-[#28c840] ring-1 ring-black/10 hover:brightness-90 md:block"
+                  className="hidden size-3.5 rounded-full bg-pistachio ring-1 ring-black/10 hover:brightness-90 md:block"
                 />
               </div>
               <p className="flex-1 pr-12 text-center text-sm font-medium md:pr-10">

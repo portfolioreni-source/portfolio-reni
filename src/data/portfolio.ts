@@ -74,24 +74,54 @@ export const tools: Tool[] = [
 ];
 
 // Habilidades que ofreces (se muestran como tarjetas). Puedes poner las que quieras.
-export type Service = { title: string; description: string };
+// Al tocar una tarjeta se abre como ventana y muestra "more" e "includes".
+export type Service = {
+  title: string;
+  description: string; // frase corta que se ve en la tarjeta
+  more: string; // texto más largo que se ve al abrirla
+  includes: string[]; // qué incluye (lista)
+};
 
 export const services: Service[] = [
   {
     title: "Diseño de interfaces",
     description: "Pantallas claras y coherentes, pensadas para quien las usa.",
+    more: "Diseño cada pantalla pensando en quién la va a usar: qué busca, qué necesita ver primero y cómo llegar a eso sin perderse.",
+    includes: [
+      "Diseño de pantallas para web y celular",
+      "Sistema de componentes reutilizables",
+      "Guía de estilos para quien desarrolla",
+    ],
   },
   {
     title: "Prototipado",
     description: "Prototipos navegables para probar ideas antes de construirlas.",
+    more: "Antes de invertir en desarrollo, armamos un prototipo que se puede tocar y recorrer, para probar la idea con personas reales.",
+    includes: [
+      "Prototipo navegable en Figma",
+      "Recorridos de los flujos principales",
+      "Ajustes según lo que surja en las pruebas",
+    ],
   },
   {
     title: "Desarrollo web",
     description: "Webs rápidas y accesibles, publicadas y listas para usar.",
+    more: "Llevo el diseño a una web real: rápida, que se vea bien en cualquier pantalla y que puedas compartir desde el primer día.",
+    includes: [
+      "Web adaptada a celular, tablet y computadora",
+      "Publicación online y dominio",
+      "Buenas prácticas de accesibilidad",
+    ],
   },
   {
     title: "Identidad visual",
     description: "Color, tipografía y estilo para que tu marca se reconozca.",
+    more: "Construimos juntos cómo se ve tu marca: colores, tipografías e imágenes que cuenten quién sos y te diferencien.",
+    includes: [
+      "Logo y sus variantes",
+      "Paleta de color y tipografías",
+      "Manual de marca y piezas para redes",
+    ],
   },
 ];
 
