@@ -55,7 +55,7 @@ export default function Home() {
       {/* Barra de progreso de lectura, pegada bajo la barra de menú */}
       <div
         aria-hidden
-        className="scroll-progress fixed inset-x-0 top-8 z-40 h-[3px] bg-fuchsia"
+        className="scroll-progress fixed inset-x-0 top-8 z-40 h-1 bg-burgundy"
       />
 
       <main>
