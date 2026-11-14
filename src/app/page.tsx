@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import {
   education,
   languages,
+  marquee,
   method,
   profile,
   projects,
@@ -42,8 +43,9 @@ const stagger = (ms: number) => ({ "--rd": `${ms}ms` }) as CSSProperties;
 // Velocidad del parallax: cuanto mayor, más se desplaza esa capa al bajar
 const speed = (ps: number) => ({ "--ps": ps }) as CSSProperties;
 
-// Palabras de la cinta que se mueve entre la portada y "Sobre mí"
-const marqueeWords = [...services.map((s) => s.title), ...tools];
+// Palabras de la cinta que se mueve entre la portada y "Sobre mí".
+// Se repiten dos veces para que la cinta nunca deje huecos, ni en pantallas muy anchas.
+const marqueeWords = [...marquee, ...marquee];
 
 export default function Home() {
   const nameLines = profile.name.split(" ");
@@ -155,8 +157,8 @@ export default function Home() {
           <div className="marquee-track font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
             {[0, 1].map((copy) => (
               <div key={copy} className="flex shrink-0 items-center">
-                {marqueeWords.map((w) => (
-                  <span key={w} className="flex items-center">
+                {marqueeWords.map((w, i) => (
+                  <span key={i} className="flex items-center">
                     <span className="px-6 py-4">{w}</span>
                     <span className="text-fuchsia">✦</span>
                   </span>

@@ -34,7 +34,20 @@ export const education = [
 
 export const languages = ["Español · nativo", "Inglés · intermedio"];
 
-export const tools = ["Figma", "Next.js", "React", "TypeScript", "Tailwind", "Notion"];
+// Palabras de la cinta que se mueve debajo de la portada.
+export const marquee = [
+  "Marca",
+  "Identidad visual",
+  "Branding",
+  "Comunicación",
+  "Diseño UX/UI",
+  "Web",
+  "Fotografía",
+  "Redes sociales",
+  "Moda",
+];
+
+export const tools =["Figma", "Next.js", "React", "TypeScript", "Tailwind", "Notion"];
 
 // Habilidades que ofreces (se muestran como tarjetas). Puedes poner las que quieras.
 export type Service = { title: string; description: string };
