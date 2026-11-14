@@ -44,6 +44,20 @@ export const awards: FolderItem[] = [
 
 export const languages = ["Español · nativo", "Inglés · C2"];
 
+// BORRADOR: características tuyas que se ven en "Sobre mí", debajo de las herramientas.
+// Cambialas, borrá o agregá las que quieras (quedan mejor cortas, de una a tres palabras).
+export const traits = [
+  "Organizada",
+  "Apasionada por la moda",
+  "Dedicada",
+  "Perseverante",
+  "Creativa",
+  "Detallista",
+  "Responsable",
+  "Curiosa",
+  "Amante del color",
+];
+
 // Palabras de la cinta que se mueve debajo de la portada.
 export const marquee = [
   "Marca",

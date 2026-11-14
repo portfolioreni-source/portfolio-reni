@@ -5,6 +5,7 @@ import {
   awards,
   education,
   languages,
+  traits,
   marquee,
   method,
   profile,
@@ -174,6 +175,37 @@ export default function Home() {
               )}
 
               <ToolList tools={tools} />
+
+              {/* Características: etiquetas tipo sticker, cada una de un color */}
+              <div className="mx-auto mt-10 max-w-sm">
+                <h3 className="text-sm font-bold">Así soy</h3>
+                <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-4">
+                  {traits.map((t, i) => (
+                    <li
+                      key={t}
+                      data-reveal=""
+                      data-reveal-type="pop"
+                      style={
+                        {
+                          ...stagger(i * 90),
+                          rotate: `${[-3, 2, -1.5, 3, -2.5, 1.5][i % 6]}deg`,
+                        } as CSSProperties
+                      }
+                      className={`rounded-full px-4 py-2 font-display text-base font-bold shadow-[0_6px_14px_-8px_rgba(121,0,46,0.5)] ${
+                        [
+                          "bg-fuchsia text-white",
+                          "bg-burgundy text-peony",
+                          "bg-orange text-white",
+                          "bg-peony text-burgundy",
+                          "bg-paper text-burgundy",
+                        ][i % 5]
+                      }`}
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="order-1 md:col-span-7">
