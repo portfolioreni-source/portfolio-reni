@@ -55,7 +55,7 @@ export default function Home() {
                 className="rise mb-6 inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm shadow-sm"
                 style={delay(0)}
               >
-                <span aria-hidden className="size-2 rounded-full bg-[var(--orange)] ring-4 ring-[var(--orange)]/25" />
+                <span aria-hidden className="status-dot size-2 rounded-full" />
                 {profile.availability}
               </p>
 

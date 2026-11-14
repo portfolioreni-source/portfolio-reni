@@ -226,6 +226,25 @@ label,
   .folder:hover .folder-icon {
     animation: jiggle 0.45s ease-in-out;
   }
+  .status-dot {
+    animation: blink 1.6s ease-in-out infinite;
+  }
+}
+/* Lucecita de "disponible": el punto titila y el aro rosa respira */
+.status-dot {
+  background: var(--fuchsia);
+  box-shadow: 0 0 0 4px rgba(245, 0, 131, 0.22);
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 4px rgba(245, 0, 131, 0.22);
+  }
+  50% {
+    opacity: 0.35;
+    box-shadow: 0 0 0 9px rgba(245, 0, 131, 0);
+  }
 }
 @keyframes rise {
   from {

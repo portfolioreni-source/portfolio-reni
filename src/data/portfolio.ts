@@ -5,7 +5,7 @@
 // recortado (sin fondo). Si dejas una ruta vacía, se muestra un espacio de borrador.
 
 export const profile = {
-  name: "Tu Nombre",
+  name: "Renata Kastika",
   role: "Diseño de producto digital",
   headline:
     "Diseño productos digitales claros, desde la primera idea hasta la pantalla final.",
