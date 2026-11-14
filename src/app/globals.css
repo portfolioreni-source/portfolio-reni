@@ -193,6 +193,12 @@ label,
     transform: translateY(-12px) scale(1.35);
   }
 }
+/* En el móvil los iconos van más juntos, así que el levante es algo menor para no montarse */
+@media (max-width: 639px) and (prefers-reduced-motion: no-preference) {
+  .dock-item[data-lift="true"] {
+    transform: translateY(-10px) scale(1.25);
+  }
+}
 @media (hover: hover) and (min-width: 640px) and (prefers-reduced-motion: no-preference) {
   /* Como en el dock de Mac: el icono bajo el cursor se levanta y crece, los
      vecinos crecen menos y se apartan para dejarle sitio. Se mueven con

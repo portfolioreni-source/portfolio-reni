@@ -8,7 +8,7 @@ function Glyph({ children }: { children: ReactNode }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="size-6"
+      className="size-5 sm:size-6"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -57,14 +57,18 @@ const mailIcon = (
   </Glyph>
 );
 
-// Secciones de la página. "desktopOnly" = se oculta en el móvil, donde no caben todos.
+// Tamaño de cada icono. En el móvil se calcula según el ancho de la pantalla para que
+// quepan los nueve en una sola fila (entre 28 px y 44 px); desde 640 px son de 48 px.
+const tile =
+  "size-[clamp(1.75rem,calc((100vw_-_4.5rem)/9),2.75rem)] sm:size-12";
+
+// Secciones de la página
 const items: {
   href: string;
   label: string;
   bg: string;
   fg: string;
   icon: ReactNode;
-  desktopOnly?: boolean;
   calendar?: boolean;
 }[] = [
   {
@@ -72,7 +76,6 @@ const items: {
     label: "Inicio",
     bg: "var(--orange)",
     fg: "#ffffff",
-    desktopOnly: true,
     icon: (
       <Glyph>
         <path d="M3 11l9-8 9 8M5 10v10h14V10" />
@@ -106,7 +109,6 @@ const items: {
     label: "Método",
     bg: "#ffffff",
     fg: "var(--fuchsia)",
-    desktopOnly: true,
     calendar: true,
     icon: (
       <Glyph>
@@ -128,8 +130,6 @@ const items: {
   },
 ];
 
-const hiddenOnMobile = new Set(["LinkedIn"]);
-
 const socialItems = [
   ...profile.links.map((l) => ({
     key: l.label,
@@ -137,7 +137,6 @@ const socialItems = [
     label: l.label,
     external: true,
     icon: socialIcons[l.label] ?? l.label.slice(0, 2),
-    desktopOnly: hiddenOnMobile.has(l.label),
   })),
   {
     key: "Mail",
@@ -145,7 +144,6 @@ const socialItems = [
     label: "Mail",
     external: false,
     icon: mailIcon,
-    desktopOnly: false,
   },
 ];
 
@@ -153,16 +151,14 @@ export function Dock() {
   return (
     <nav
       aria-label="Dock"
-      className="dock fixed bottom-3 left-1/2 z-50 flex -translate-x-1/2 items-end gap-2.5 rounded-[1.4rem] border border-white/70 bg-paper/60 px-3 py-2.5 shadow-[0_10px_40px_-10px_rgba(121,0,46,0.4)] backdrop-blur-xl sm:gap-3 sm:px-6 md:gap-4"
+      className="dock fixed bottom-3 left-1/2 z-50 flex -translate-x-1/2 items-end gap-1 rounded-[1.4rem] border border-white/70 bg-paper/60 px-2 py-2.5 shadow-[0_10px_40px_-10px_rgba(121,0,46,0.4)] backdrop-blur-xl sm:gap-3 sm:px-6 md:gap-4"
     >
       {items.map((it) => (
         <DockItem
           key={it.label}
           href={it.href}
           label={it.label}
-          className={`dock-item size-11 place-items-center rounded-[0.8rem] shadow-sm sm:size-12 ${
-            it.desktopOnly ? "hidden sm:grid" : "grid"
-          }`}
+          className={`dock-item ${tile} grid place-items-center rounded-[0.7rem] shadow-sm sm:rounded-[0.8rem]`}
           style={{ background: it.bg, color: it.fg }}
         >
           <span className="dock-tip">{it.label}</span>
@@ -170,7 +166,7 @@ export function Dock() {
         </DockItem>
       ))}
 
-      <span aria-hidden className="mx-0.5 h-9 w-px self-center bg-ink/15" />
+      <span aria-hidden className="mx-0.5 h-7 w-px self-center bg-ink/15 sm:h-9" />
 
       {socialItems.map((s) => (
         <DockItem
@@ -178,9 +174,7 @@ export function Dock() {
           href={s.href}
           label={s.label}
           external={s.external}
-          className={`dock-item size-11 place-items-center rounded-[0.8rem] bg-ink text-sm font-bold text-[var(--peony)] shadow-sm sm:size-12 ${
-            s.desktopOnly ? "hidden sm:grid" : "grid"
-          }`}
+          className={`dock-item ${tile} grid place-items-center rounded-[0.7rem] bg-ink text-xs font-bold text-[var(--peony)] shadow-sm sm:rounded-[0.8rem] sm:text-sm`}
           style={{}}
         >
           <span className="dock-tip">{s.label}</span>

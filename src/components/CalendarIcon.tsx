@@ -31,8 +31,10 @@ export function CalendarIcon({ children }: { children: ReactNode }) {
   const [weekday, day] = today.split("|");
   return (
     <span aria-hidden className="flex flex-col items-center leading-none">
-      <span className="text-[0.62rem] font-bold text-orange">{weekday}</span>
-      <span className="mt-0.5 font-display text-[1.55rem] font-medium text-burgundy">
+      <span className="text-[0.5rem] font-bold text-orange sm:text-[0.62rem]">
+        {weekday}
+      </span>
+      <span className="mt-px font-display text-[1.05rem] font-medium text-burgundy sm:mt-0.5 sm:text-[1.55rem]">
         {day}
       </span>
     </span>
