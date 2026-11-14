@@ -154,13 +154,16 @@ export default function Home() {
 
         {/* ---------------- Sobre mí ---------------- */}
         <section id="sobre-mi" className="scroll-mt-10 bg-pistachio">
-          <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-6 py-24 sm:py-32 md:grid-cols-12">
+          <div className="mx-auto grid w-full max-w-6xl items-start gap-14 px-6 py-24 sm:py-32 md:grid-cols-12">
+            {/* Herramientas (y foto, si hay): en compu a la derecha, a la altura del texto;
+                en el celular, debajo de todo */}
             <div
-              className="md:col-span-5"
+              className="order-2 md:col-span-5 md:mt-28"
               data-reveal=""
               data-reveal-type="left"
             >
-              {profile.aboutPhoto ? (
+              {/* Foto opcional: si "aboutPhoto" está vacío, no se muestra nada */}
+              {profile.aboutPhoto && (
                 <Image
                   src={asset(profile.aboutPhoto)}
                   alt={`Foto de ${profile.name}`}
@@ -168,21 +171,12 @@ export default function Home() {
                   height={800}
                   className="mx-auto h-auto w-full max-w-sm object-contain"
                 />
-              ) : (
-                <div
-                  aria-hidden
-                  className="hatch mx-auto grid aspect-[3/4] w-full max-w-sm place-items-center rounded-[2rem] border border-ink/10"
-                >
-                  <span className="px-6 text-center text-xs uppercase tracking-widest text-sel/70">
-                    Tu foto recortada
-                  </span>
-                </div>
               )}
 
               <ToolList tools={tools} />
             </div>
 
-            <div className="md:col-span-7">
+            <div className="order-1 md:col-span-7">
               <h2
                 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl"
                 data-reveal=""
