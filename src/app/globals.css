@@ -62,27 +62,31 @@ body {
   line-height: 1.1;
   background: var(--peony);
 }
+/* Cada tirador es una barra con un punto en un extremo. La caja del tirador
+   sobresale lo suficiente para que el punto se dibuje completo, sin cortarse. */
 .selected::before,
 .selected::after {
   content: "";
   position: absolute;
   width: 12px;
-  top: -4px;
-  bottom: -4px;
-  background:
-    linear-gradient(var(--sel), var(--sel)) center / 3px 100% no-repeat;
 }
 .selected::before {
   left: -5px;
+  top: -10px;
+  bottom: -4px;
   background:
-    radial-gradient(circle at 50% 0, var(--sel) 5.5px, transparent 6px),
-    linear-gradient(var(--sel), var(--sel)) center / 3px 100% no-repeat;
+    radial-gradient(circle at 50% 6px, var(--sel) 5.5px, transparent 6px),
+    linear-gradient(var(--sel), var(--sel)) 50% 6px / 3px calc(100% - 6px)
+      no-repeat;
 }
 .selected::after {
   right: -5px;
+  top: -4px;
+  bottom: -10px;
   background:
-    radial-gradient(circle at 50% 100%, var(--sel) 5.5px, transparent 6px),
-    linear-gradient(var(--sel), var(--sel)) center / 3px 100% no-repeat;
+    radial-gradient(circle at 50% calc(100% - 6px), var(--sel) 5.5px, transparent 6px),
+    linear-gradient(var(--sel), var(--sel)) 50% 0 / 3px calc(100% - 6px)
+      no-repeat;
 }
 
 /* En la banda rosa el resaltado es crema, para que se note */
