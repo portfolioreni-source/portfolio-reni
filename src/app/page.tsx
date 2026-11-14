@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 import type { CSSProperties } from "react";
 import {
   education,
@@ -120,7 +121,7 @@ export default function Home() {
                 {profile.photo ? (
                   <div className="relative h-[24rem] w-72 overflow-hidden rounded-b-[2rem] rounded-t-[999px] border-[5px] border-paper shadow-[0_30px_60px_-25px_rgba(121,0,46,0.55)] sm:h-[32rem] sm:w-80 lg:h-[36rem] lg:w-[24rem]">
                     <Image
-                      src={profile.photo}
+                      src={asset(profile.photo)}
                       alt={`Retrato de ${profile.name}`}
                       fill
                       priority
@@ -169,7 +170,7 @@ export default function Home() {
             >
               {profile.aboutPhoto ? (
                 <Image
-                  src={profile.aboutPhoto}
+                  src={asset(profile.aboutPhoto)}
                   alt={`Foto de ${profile.name}`}
                   width={600}
                   height={800}

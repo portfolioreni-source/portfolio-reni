@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 import {
   useCallback,
   useEffect,
@@ -280,7 +281,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
                 <div className="hatch relative aspect-[2/1]">
                   {p.image ? (
                     <Image
-                      src={p.image}
+                      src={asset(p.image)}
                       alt={`Imagen del proyecto ${p.title}`}
                       fill
                       sizes="(min-width: 768px) 640px, 100vw"
