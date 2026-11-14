@@ -175,15 +175,21 @@ export function Method({ steps }: { steps: MethodStep[] }) {
             Paso {sel + 1} · {dayLong[sel]}
           </p>
           <h4 className="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-            {step.title}
+            <span
+              className="box-decoration-clone px-1"
+              style={{
+                backgroundImage: `linear-gradient(transparent 55%, color-mix(in srgb, ${color} ${color.includes("burgundy") ? 25 : 55}%, transparent) 55%)`,
+              }}
+            >
+              {step.title}
+            </span>
           </h4>
-          <p className="mt-3 max-w-prose text-lg leading-relaxed text-muted">
+          <p className="mt-3 max-w-md text-pretty text-lg leading-relaxed text-muted">
             {step.summary}
           </p>
         </div>
         <div className="self-start rounded-2xl border border-ink/10 bg-paper p-5 md:col-span-5">
-          <p className="text-sm font-semibold text-sel">Qué recibís</p>
-          <p className="mt-2 text-lg">{step.deliverable}</p>
+          <p className="text-pretty text-lg">{step.deliverable}</p>
         </div>
       </div>
     </div>

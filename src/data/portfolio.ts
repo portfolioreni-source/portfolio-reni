@@ -127,7 +127,7 @@ export const services: Service[] = [
 
 // Método de trabajo: cada paso ocupa un día del calendario, de lunes a domingo.
 // Con 5 pasos quedan lunes a viernes y el fin de semana muestra "Disfrutar el resultado" y "Ver crecer tu proyecto".
-// Admite hasta 7 pasos. (Los de abajo son de ejemplo: cámbialos por los tuyos.)
+// Admite hasta 7 pasos.
 export type MethodStep = {
   title: string; // nombre corto del paso
   summary: string; // qué pasa en este paso
@@ -139,31 +139,31 @@ export const method: MethodStep[] = [
     title: "Escuchar",
     summary:
       "Empezamos con una conversación para entender qué necesitás, para quién es y qué tiene que lograr.",
-    deliverable: "Un resumen de objetivos y alcance.",
+    deliverable: "El brief del proyecto, el plan de trabajo y las condiciones acordadas.",
   },
   {
-    title: "Definir",
+    title: "Investigar y definir",
     summary:
-      "Ordeno las ideas: a quién te diriges, qué contenidos hacen falta y qué va primero.",
-    deliverable: "Un mapa de la web y una lista de prioridades.",
+      "Investigo tu rubro, tu público y tus referentes para definir el rumbo del proyecto.",
+    deliverable: "Una investigación y una definición clarísima del proyecto y sus objetivos.",
   },
   {
-    title: "Diseñar",
+    title: "Diseño y producción",
     summary:
-      "Creo las pantallas con tu identidad: color, tipografía y los componentes que se repiten.",
-    deliverable: "El diseño completo en Figma.",
+      "Creo las piezas con tu identidad: color, tipografía, imágenes y todo lo que el proyecto necesite.",
+    deliverable: "La producción gráfica y visual del proyecto.",
   },
   {
-    title: "Probar",
+    title: "Ajustes",
     summary:
-      "Revisamos juntos un prototipo navegable y ajusto lo que haga falta antes de construir.",
-    deliverable: "Un prototipo y la lista de cambios.",
+      "Revisamos juntos el trabajo y ajusto los detalles hasta que quede como te gusta.",
+    deliverable: "El trabajo ajustado a tus gustos.",
   },
   {
-    title: "Entregar",
+    title: "Entrega",
     summary:
-      "Preparo los archivos finales, publico todo y te explico cómo usarlo.",
-    deliverable: "La web publicada y una guía de uso.",
+      "Preparo los archivos finales, los ordeno y te explico cómo usarlos.",
+    deliverable: "El proyecto terminado, organizado y listo para utilizar.",
   },
 ];
 
