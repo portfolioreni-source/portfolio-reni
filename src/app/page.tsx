@@ -340,7 +340,7 @@ export default function Home() {
               data-reveal=""
               style={stagger(150)}
             >
-              Contame qué necesitás y vemos cómo ayudarte.
+              Escribime y damos el primer paso de tu proyecto.
             </p>
 
             <p
