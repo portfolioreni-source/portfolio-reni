@@ -32,6 +32,70 @@ export const languages = ["Español · nativo", "Inglés · intermedio"];
 
 export const tools = ["Figma", "Next.js", "React", "TypeScript", "Tailwind", "Notion"];
 
+// Habilidades que ofreces (se muestran como tarjetas). Puedes poner las que quieras.
+export type Service = { title: string; description: string };
+
+export const services: Service[] = [
+  {
+    title: "Diseño de interfaces",
+    description: "Pantallas claras y coherentes, pensadas para quien las usa.",
+  },
+  {
+    title: "Prototipado",
+    description: "Prototipos navegables para probar ideas antes de construirlas.",
+  },
+  {
+    title: "Desarrollo web",
+    description: "Webs rápidas y accesibles, publicadas y listas para usar.",
+  },
+  {
+    title: "Identidad visual",
+    description: "Color, tipografía y estilo para que tu marca se reconozca.",
+  },
+];
+
+// Método de trabajo: cada paso ocupa un día del calendario, de lunes a domingo.
+// Con 5 pasos quedan lunes a viernes y el fin de semana se muestra como descanso.
+// Admite hasta 7 pasos. (Los de abajo son de ejemplo: cámbialos por los tuyos.)
+export type MethodStep = {
+  title: string; // nombre corto del paso
+  summary: string; // qué pasa en este paso
+  deliverable: string; // qué recibe la persona al terminar el paso
+};
+
+export const method: MethodStep[] = [
+  {
+    title: "Escuchar",
+    summary:
+      "Empezamos con una conversación para entender qué necesitas, para quién es y qué tiene que lograr.",
+    deliverable: "Un resumen de objetivos y alcance.",
+  },
+  {
+    title: "Definir",
+    summary:
+      "Ordeno las ideas: a quién te diriges, qué contenidos hacen falta y qué va primero.",
+    deliverable: "Un mapa de la web y una lista de prioridades.",
+  },
+  {
+    title: "Diseñar",
+    summary:
+      "Creo las pantallas con tu identidad: color, tipografía y los componentes que se repiten.",
+    deliverable: "El diseño completo en Figma.",
+  },
+  {
+    title: "Probar",
+    summary:
+      "Revisamos juntos un prototipo navegable y ajusto lo que haga falta antes de construir.",
+    deliverable: "Un prototipo y la lista de cambios.",
+  },
+  {
+    title: "Entregar",
+    summary:
+      "Preparo los archivos finales, publico todo y te explico cómo usarlo.",
+    deliverable: "La web publicada y una guía de uso.",
+  },
+];
+
 // Colores disponibles para las etiquetas de cada proyecto.
 export type ProjectColor = "peony" | "pistachio" | "burgundy" | "fuchsia";
 

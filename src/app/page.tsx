@@ -3,8 +3,10 @@ import type { CSSProperties } from "react";
 import {
   education,
   languages,
+  method,
   profile,
   projects,
+  services,
   tools,
 } from "@/data/portfolio";
 import { CopyEmail } from "@/components/CopyEmail";
@@ -12,6 +14,15 @@ import { Desktop } from "@/components/Desktop";
 import { Dock } from "@/components/Dock";
 import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
+import { Method } from "@/components/Method";
+
+// Colores de las tarjetas de habilidades (fondo y texto, ya con buen contraste)
+const serviceColors = [
+  { bg: "var(--peony)", fg: "var(--burgundy)" },
+  { bg: "var(--pistachio)", fg: "var(--burgundy)" },
+  { bg: "var(--burgundy)", fg: "var(--peony)" },
+  { bg: "#ffffff", fg: "var(--burgundy)" },
+];
 
 // Iconos de app para las herramientas: color de fondo y de texto de cada uno.
 const appColors = [
@@ -191,6 +202,52 @@ export default function Home() {
                 ))}
               </ul>
             </div>
+          </div>
+        </section>
+
+        {/* ---------------- Habilidades ---------------- */}
+        <section
+          id="habilidades"
+          className="mx-auto w-full max-w-6xl scroll-mt-10 px-6 py-24 sm:py-32"
+        >
+          <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+            <span className="selected">habilidades</span>
+          </h2>
+          <p className="mt-8 max-w-md text-lg text-muted">
+            Lo que puedo hacer por tu proyecto.
+          </p>
+          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((s, i) => {
+              const c = serviceColors[i % serviceColors.length];
+              return (
+                <li
+                  key={s.title}
+                  className="rounded-[1.75rem] border border-ink/10 p-6 sm:p-7"
+                  style={{ background: c.bg, color: c.fg }}
+                >
+                  <h3 className="font-display text-2xl font-bold leading-tight tracking-tight">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed opacity-85">
+                    {s.description}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        {/* ---------------- Método de trabajo ---------------- */}
+        <section id="metodo" className="band-peony scroll-mt-10 bg-peony">
+          <div className="mx-auto w-full max-w-6xl px-6 py-24 sm:py-32">
+            <h2 className="font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+              <span className="selected">mi método</span>
+            </h2>
+            <p className="mb-12 mt-8 max-w-md text-lg text-muted">
+              Cada día de la semana es un paso. Pulsa uno para ver qué pasa y qué
+              recibes.
+            </p>
+            <Method steps={method} />
           </div>
         </section>
 

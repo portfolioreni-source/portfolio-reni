@@ -29,11 +29,17 @@ export function MenuBar({ name }: { name: string }) {
         <a href="#inicio" className="font-bold">
           {name}
         </a>
-        <a href="#proyectos" className="hidden text-muted hover:text-ink sm:inline">
-          Proyectos
-        </a>
         <a href="#sobre-mi" className="hidden text-muted hover:text-ink sm:inline">
           Sobre mí
+        </a>
+        <a href="#habilidades" className="hidden text-muted hover:text-ink sm:inline">
+          Habilidades
+        </a>
+        <a href="#metodo" className="hidden text-muted hover:text-ink sm:inline">
+          Método
+        </a>
+        <a href="#proyectos" className="hidden text-muted hover:text-ink sm:inline">
+          Proyectos
         </a>
         <a href="#contacto" className="hidden text-muted hover:text-ink sm:inline">
           Contacto
