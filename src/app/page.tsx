@@ -111,7 +111,7 @@ export default function Home() {
                   href="#contacto"
                   className="rounded-full bg-paper px-6 py-3 font-semibold text-burgundy shadow-sm transition-colors hover:bg-pistachio"
                 >
-                  Escríbeme
+                  Escribime
                 </a>
               </div>
             </div>
@@ -336,8 +336,8 @@ export default function Home() {
               data-reveal=""
               style={stagger(120)}
             >
-              Cada día de la semana es un paso. Pulsa uno para ver qué pasa y qué
-              recibes.
+              Cada día de la semana es un paso. Tocá uno para ver qué pasa y qué
+              recibís.
             </p>
             <Method steps={method} />
           </div>
@@ -359,7 +359,7 @@ export default function Home() {
             data-reveal=""
             style={stagger(120)}
           >
-            Cada carpeta es un proyecto. Ábrela para ver de qué trata.
+            Cada carpeta es un proyecto. Abrila para ver de qué trata.
           </p>
           <Desktop projects={projects} />
         </section>
@@ -381,7 +381,7 @@ export default function Home() {
               data-reveal=""
               style={stagger(150)}
             >
-              Cuéntame qué necesitas y vemos cómo ayudarte.
+              Contame qué necesitás y vemos cómo ayudarte.
             </p>
 
             <p

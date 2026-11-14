@@ -180,7 +180,7 @@ export function Method({ steps }: { steps: MethodStep[] }) {
           </p>
         </div>
         <div className="self-start rounded-2xl border border-ink/10 bg-paper p-5 md:col-span-5">
-          <p className="text-sm font-semibold text-sel">Qué recibes</p>
+          <p className="text-sm font-semibold text-sel">Qué recibís</p>
           <p className="mt-2 text-lg">{step.deliverable}</p>
         </div>
       </div>

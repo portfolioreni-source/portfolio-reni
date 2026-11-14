@@ -206,9 +206,9 @@ export function Desktop({ projects }: { projects: Project[] }) {
         ))}
 
         <p className="col-span-full self-end text-center text-xs text-muted md:absolute md:bottom-4 md:left-0 md:right-0">
-          <span className="md:hidden">Toca una carpeta para abrirla.</span>
+          <span className="md:hidden">Tocá una carpeta para abrirla.</span>
           <span className="hidden md:inline">
-            Arrastra las carpetas y haz clic para abrirlas.
+            Arrastrá las carpetas y hacé clic para abrirlas.
           </span>
         </p>
       </div>

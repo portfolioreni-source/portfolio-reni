@@ -6,14 +6,14 @@
 
 export const profile = {
   name: "Renata Kastika",
-  role: "Diseño de producto digital",
+  role: "Diseñadora en comunicación visual, gráfica y digital",
   headline:
-    "Diseño productos digitales claros, desde la primera idea hasta la pantalla final.",
+    "¿Tu marca no transmite lo que querés? Te ayudo a diseñar una identidad que te represente. Desde la comunicación en redes, producciones de fotos, hasta la página web.",
   availability: "Disponible para nuevos proyectos",
   cutout: "", // foto recortada para la portada, por ejemplo "/yo-portada.png"
   aboutPhoto: "", // foto recortada para "Sobre mí", por ejemplo "/yo-sobre-mi.png"
   about: [
-    "Escribe aquí un párrafo sobre ti: qué haces, cómo trabajas y qué tipo de proyectos buscas.",
+    "Escribí acá un párrafo sobre vos: qué hacés, cómo trabajás y qué tipo de proyectos buscás.",
     "Un segundo párrafo, opcional, con algo más personal: qué te inspira o qué te gusta hacer fuera del trabajo.",
   ],
   email: "tu-mail@ejemplo.com",
@@ -71,7 +71,7 @@ export const method: MethodStep[] = [
   {
     title: "Escuchar",
     summary:
-      "Empezamos con una conversación para entender qué necesitas, para quién es y qué tiene que lograr.",
+      "Empezamos con una conversación para entender qué necesitás, para quién es y qué tiene que lograr.",
     deliverable: "Un resumen de objetivos y alcance.",
   },
   {
@@ -121,7 +121,7 @@ export const projects: Project[] = [
     year: "2026",
     role: "Diseño y desarrollo",
     summary:
-      "Describe en una o dos frases qué problema resolvía y qué cambió gracias a tu trabajo.",
+      "Describí en una o dos frases qué problema resolvía y qué cambió gracias a tu trabajo.",
     tags: ["Next.js", "UX"],
     color: "fuchsia",
     href: "https://ejemplo.com",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
     year: "2025",
     role: "Diseño de interfaz",
     summary:
-      "Otra descripción breve. Cuenta el resultado, no solo las herramientas que usaste.",
+      "Otra descripción breve. Contá el resultado, no solo las herramientas que usaste.",
     tags: ["UI", "Figma"],
     color: "pistachio",
     repo: "https://github.com/tu-usuario/proyecto-dos",
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     title: "Proyecto tres",
     year: "2025",
     role: "Identidad y web",
-    summary: "Un tercer proyecto. Puedes borrar los que no uses o añadir más.",
+    summary: "Un tercer proyecto. Podés borrar los que no uses o añadir más.",
     tags: ["Marca", "Web"],
     color: "peony",
     href: "https://ejemplo.com",
