@@ -194,8 +194,8 @@ label,
      vecinos crecen menos y se apartan para dejarle sitio. Se mueven con
      translateX (no cambian el ancho del dock, así que nada baila bajo el cursor). */
   .dock {
-    --d1: 10px; /* cuánto se aparta el vecino directo */
-    --d2: 15px; /* cuánto se apartan los demás */
+    --d1: 12px; /* cuánto se aparta el vecino directo */
+    --d2: 17px; /* cuánto se apartan los demás */
   }
   .dock-item:hover ~ .dock-item {
     transform: translateX(var(--d2));

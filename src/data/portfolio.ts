@@ -17,9 +17,13 @@ export const profile = {
     "Un segundo párrafo, opcional, con algo más personal: qué te inspira o qué te gusta hacer fuera del trabajo.",
   ],
   email: "tu-mail@ejemplo.com",
+  // Redes y contacto. Los nombres "LinkedIn", "Instagram" y "WhatsApp" eligen el
+  // icono del dock, así que no los cambies; solo cambia las direcciones.
+  // WhatsApp: "https://wa.me/" + código de país + número, todo junto y sin + ni espacios.
   links: [
-    { label: "GitHub", href: "https://github.com/tu-usuario" },
     { label: "LinkedIn", href: "https://linkedin.com/in/tu-usuario" },
+    { label: "Instagram", href: "https://instagram.com/tu-usuario" },
+    { label: "WhatsApp", href: "https://wa.me/00000000000" },
   ],
 };
 
