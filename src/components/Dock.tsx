@@ -1,4 +1,5 @@
 import { profile } from "@/data/portfolio";
+import { CalendarIcon } from "./CalendarIcon";
 
 function Icon({ d }: { d: string }) {
   return (
@@ -21,7 +22,7 @@ const items = [
   { href: "#inicio", label: "Inicio", bg: "var(--orange)", fg: "#ffffff", d: "M3 11l9-8 9 8M5 10v10h14V10" },
   { href: "#proyectos", label: "Proyectos", bg: "var(--fuchsia)", fg: "#ffffff", d: "M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" },
   { href: "#sobre-mi", label: "Sobre mí", bg: "var(--pistachio)", fg: "var(--burgundy)", d: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" },
-  { href: "#metodo", label: "Método", bg: "#ffffff", fg: "var(--fuchsia)", desktopOnly: true, d: "M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" },
+  { href: "#metodo", label: "Método", bg: "#ffffff", fg: "var(--fuchsia)", desktopOnly: true, calendar: true, d: "M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" },
   { href: "#contacto", label: "Contacto", bg: "var(--peony)", fg: "var(--burgundy)", d: "M4 6h16v12H4zM4 7l8 6 8-6" },
 ];
 
@@ -42,7 +43,13 @@ export function Dock() {
           style={{ background: it.bg, color: it.fg }}
         >
           <span className="dock-tip">{it.label}</span>
-          <Icon d={it.d} />
+          {"calendar" in it && it.calendar ? (
+            <CalendarIcon>
+              <Icon d={it.d} />
+            </CalendarIcon>
+          ) : (
+            <Icon d={it.d} />
+          )}
         </a>
       ))}
 
