@@ -177,8 +177,17 @@ label,
   transition: opacity 0.12s ease;
 }
 .dock-item:hover .dock-tip,
-.dock-item:focus-visible .dock-tip {
+.dock-item:focus-visible .dock-tip,
+.dock-item[data-lift="true"] .dock-tip {
   opacity: 1;
+}
+/* Al tocar o pulsar un icono (sobre todo en el móvil, donde no hay cursor) se
+   levanta y crece un momento. Va antes de las reglas de :hover para que en el
+   ordenador manden estas últimas. 1.35 cabe en el hueco entre iconos. */
+@media (prefers-reduced-motion: no-preference) {
+  .dock-item[data-lift="true"] {
+    transform: translateY(-12px) scale(1.35);
+  }
 }
 @media (hover: hover) and (min-width: 640px) and (prefers-reduced-motion: no-preference) {
   /* Como en el dock de Mac: el icono bajo el cursor se levanta y crece, los

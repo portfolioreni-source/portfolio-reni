@@ -1,5 +1,6 @@
 import { profile } from "@/data/portfolio";
 import { CalendarIcon } from "./CalendarIcon";
+import { DockItem } from "./DockItem";
 
 function Icon({ d }: { d: string }) {
   return (
@@ -33,10 +34,10 @@ export function Dock() {
       className="dock fixed bottom-3 left-1/2 z-50 flex -translate-x-1/2 items-end gap-2.5 rounded-[1.4rem] border border-white/70 bg-paper/60 px-3 py-2.5 sm:gap-4 sm:px-6 shadow-[0_10px_40px_-10px_rgba(121,0,46,0.4)] backdrop-blur-xl"
     >
       {items.map((it) => (
-        <a
+        <DockItem
           key={it.label}
           href={it.href}
-          aria-label={it.label}
+          label={it.label}
           className={`dock-item place-items-center rounded-[0.8rem] shadow-sm size-11 sm:size-12 ${
             "desktopOnly" in it && it.desktopOnly ? "hidden sm:grid" : "grid"
           }`}
@@ -50,23 +51,23 @@ export function Dock() {
           ) : (
             <Icon d={it.d} />
           )}
-        </a>
+        </DockItem>
       ))}
 
       <span aria-hidden className="mx-0.5 h-9 w-px self-center bg-ink/15" />
 
       {profile.links.map((l) => (
-        <a
+        <DockItem
           key={l.label}
           href={l.href}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${l.label} (se abre en otra pestaña)`}
+          label={l.label}
+          external
           className="dock-item grid size-11 place-items-center rounded-[0.8rem] bg-ink text-sm font-bold text-[var(--peony)] shadow-sm sm:size-12"
+          style={{}}
         >
           <span className="dock-tip">{l.label}</span>
           {l.label.slice(0, 2)}
-        </a>
+        </DockItem>
       ))}
     </nav>
   );
