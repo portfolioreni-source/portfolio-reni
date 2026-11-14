@@ -118,21 +118,23 @@ export default function Home() {
 
             <div
               className="parallax relative mx-auto flex w-full max-w-sm items-end justify-center lg:col-span-4 lg:max-w-none"
-              style={speed(0.2)}
+              style={speed(-0.08)}
             >
               <div
-                className="rise flex w-full items-end justify-center"
+                className="rise flex w-full items-end justify-center pb-16 lg:pb-24"
                 style={delay(200)}
               >
-                {profile.cutout ? (
-                  <Image
-                    src={profile.cutout}
-                    alt={`Retrato de ${profile.name}`}
-                    width={700}
-                    height={900}
-                    priority
-                    className="relative z-0 h-auto w-full max-w-md object-contain"
-                  />
+                {profile.photo ? (
+                  <div className="relative h-[24rem] w-72 overflow-hidden rounded-b-[2rem] rounded-t-[999px] border-[5px] border-paper shadow-[0_30px_60px_-25px_rgba(121,0,46,0.55)] sm:h-[32rem] sm:w-80 lg:h-[36rem] lg:w-[24rem]">
+                    <Image
+                      src={profile.photo}
+                      alt={`Retrato de ${profile.name}`}
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 384px, 320px"
+                      className="object-cover object-[50%_35%]"
+                    />
+                  </div>
                 ) : (
                   <div
                     aria-hidden
