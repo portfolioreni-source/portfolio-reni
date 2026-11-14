@@ -191,7 +191,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
               } as CSSProperties
             }
           >
-            <FolderIcon className="folder-icon w-24 drop-shadow-[0_8px_10px_rgba(119,5,35,0.22)] md:w-28" />
+            <FolderIcon className="folder-icon w-24 drop-shadow-[0_8px_10px_rgba(121,0,46,0.22)] md:w-28" />
             <span
               className="folder-label mt-2 rounded-md px-2 py-0.5 text-sm font-semibold"
               style={tagVars(p.color)}

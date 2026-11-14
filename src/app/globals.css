@@ -3,18 +3,18 @@
 :root {
   color-scheme: light;
   /* Paleta: crema de fondo, peony, burgundy, pistachio, fuchsia y blood orange */
-  --paper: #fff9ec;
-  --desk: #f0087a;
+  --paper: #fff7e6;
+  --desk: #f50083;
   --surface: #ffe3ef;
-  --ink: #7a0020;
+  --ink: #79002e;
   --muted: #a3123f;
-  --sel: #f0087a;
-  --sel-soft: rgba(240, 8, 122, 0.18);
-  --peony: #ffc2dc;
-  --pistachio: #cdea6a;
-  --burgundy: #7a0020;
-  --fuchsia: #f0087a;
-  --orange: #ff4a14;
+  --sel: #f50083;
+  --sel-soft: rgba(245, 0, 131, 0.18);
+  --peony: #ff9dcb;
+  --pistachio: #c5ed43;
+  --burgundy: #79002e;
+  --fuchsia: #f50083;
+  --orange: #ff511f;
 }
 
 @theme inline {
@@ -48,8 +48,8 @@ body {
    Sobre botones, enlaces y carpetas pasa a naranja. Los dos números son el
    punto exacto que cuenta como "clic" (la punta de la flecha). */
 :root {
-  --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='white' stroke='white' stroke-width='3.4' stroke-linejoin='round'/%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='%23f0087a' stroke='%237a0020' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, auto;
-  --cursor-act: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='white' stroke='white' stroke-width='3.4' stroke-linejoin='round'/%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='%23ff4a14' stroke='%237a0020' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, pointer;
+  --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='white' stroke='white' stroke-width='3.4' stroke-linejoin='round'/%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='%23f50083' stroke='%2379002e' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, auto;
+  --cursor-act: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='white' stroke='white' stroke-width='3.4' stroke-linejoin='round'/%3E%3Cpath d='M4 3l7 17 2.4-7.2L21 10z' fill='%23ff511f' stroke='%2379002e' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, pointer;
 }
 html {
   cursor: var(--cursor);
@@ -113,12 +113,16 @@ label,
 .band-peony .selected {
   background: var(--paper);
 }
+/* El peony nuevo es más oscuro: el texto secundario pasa a burgundy para leerse bien */
+.band-peony {
+  --muted: var(--burgundy);
+}
 
 /* ---------- Escritorio ---------- */
 .desk-surface {
   background-color: var(--surface);
   background-image: radial-gradient(
-    rgba(119, 5, 35, 0.16) 1px,
+    rgba(121, 0, 46, 0.16) 1px,
     transparent 1.2px
   );
   background-size: 22px 22px;
@@ -129,7 +133,7 @@ label,
   background-color: #fff3f7;
   background-image: repeating-linear-gradient(
     135deg,
-    rgba(232, 16, 106, 0.13) 0 1px,
+    rgba(245, 0, 131, 0.13) 0 1px,
     transparent 1px 11px
   );
 }
