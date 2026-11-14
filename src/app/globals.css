@@ -68,10 +68,14 @@ label,
   background: var(--sel-soft);
 }
 
-:focus-visible {
-  outline: 2px solid var(--sel);
-  outline-offset: 3px;
-  border-radius: 6px;
+/* En la capa base, para que las clases de cada elemento (bordes redondeados,
+   otro color de trazo) puedan cambiarlo */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--sel);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }
 
 /* ---------- Texto "seleccionado", con los tiradores azules ---------- */

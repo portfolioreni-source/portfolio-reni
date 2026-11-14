@@ -84,43 +84,43 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: "Diseño de interfaces",
-    description: "Pantallas claras y coherentes, pensadas para quien las usa.",
-    more: "Diseño cada pantalla pensando en quién la va a usar: qué busca, qué necesita ver primero y cómo llegar a eso sin perderse.",
+    title: "Identidad de marca",
+    description: "Una marca que se reconoce al instante y cuenta quién sos.",
+    more: "Antes de diseñar, escucho: tu historia, tus valores y a quién le querés hablar. Con eso construimos una identidad con personalidad propia, coherente en cada lugar donde aparezca tu marca.",
     includes: [
-      "Diseño de pantallas para web y celular",
-      "Sistema de componentes reutilizables",
-      "Guía de estilos para quien desarrolla",
+      "Logo y sus variantes",
+      "Paleta de color y tipografías",
+      "Manual de marca para usarla siempre bien",
     ],
   },
   {
-    title: "Prototipado",
-    description: "Prototipos navegables para probar ideas antes de construirlas.",
-    more: "Antes de invertir en desarrollo, armamos un prototipo que se puede tocar y recorrer, para probar la idea con personas reales.",
+    title: "Producción de contenido",
+    description: "Fotos y piezas visuales que hablan el idioma de tu marca.",
+    more: "Como fotógrafa, me encargo de todo: pienso la idea, armo la estética, hago la sesión de fotos y edito. Así cada imagen se ve profesional y parte de la misma historia.",
     includes: [
-      "Prototipo navegable en Figma",
-      "Recorridos de los flujos principales",
-      "Ajustes según lo que surja en las pruebas",
+      "Sesiones de fotos de producto, marca o retrato",
+      "Dirección de arte y estética de la producción",
+      "Edición y piezas listas para publicar",
+    ],
+  },
+  {
+    title: "Comunicación",
+    description: "Redes y piezas con un mensaje claro y una imagen coherente.",
+    more: "Ordenamos qué querés decir, a quién y cómo, para que tu marca se vea y se escuche igual en redes, en piezas gráficas y en cada lugar donde aparezca.",
+    includes: [
+      "Estrategia y estética para redes sociales",
+      "Diseño de posteos, historias y plantillas",
+      "Piezas gráficas para impresión y digital",
     ],
   },
   {
     title: "Desarrollo web",
-    description: "Webs rápidas y accesibles, publicadas y listas para usar.",
-    more: "Llevo el diseño a una web real: rápida, que se vea bien en cualquier pantalla y que puedas compartir desde el primer día.",
+    description: "Tu web completa: diseño, programación y lista para usar.",
+    more: "Me ocupo de todo el proceso: diseño las pantallas, armamos un prototipo para probarlo y después la programo. Recibís tu web publicada, rápida y lista para compartir.",
     includes: [
-      "Web adaptada a celular, tablet y computadora",
-      "Publicación online y dominio",
-      "Buenas prácticas de accesibilidad",
-    ],
-  },
-  {
-    title: "Identidad visual",
-    description: "Color, tipografía y estilo para que tu marca se reconozca.",
-    more: "Construimos juntos cómo se ve tu marca: colores, tipografías e imágenes que cuenten quién sos y te diferencien.",
-    includes: [
-      "Logo y sus variantes",
-      "Paleta de color y tipografías",
-      "Manual de marca y piezas para redes",
+      "Diseño de pantallas y prototipo navegable",
+      "Programación adaptada a celular y computadora",
+      "Publicación online, lista para usar",
     ],
   },
 ];

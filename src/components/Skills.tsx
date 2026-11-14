@@ -128,7 +128,8 @@ export function Skills({ services }: { services: Service[] }) {
       setOpen(null);
       // Esperar a que la tarjeta vuelva a verse para devolverle el foco
       requestAnimationFrame(() =>
-        cards.current[i]?.focus({ preventScroll: true }),
+        // sin trazo: así solo la tarjeta bajo el mouse lo muestra
+        cards.current[i]?.focus({ preventScroll: true, focusVisible: false } as FocusOptions),
       );
     };
     const t = fromCard(i);
@@ -177,7 +178,7 @@ export function Skills({ services }: { services: Service[] }) {
 
   return (
     <>
-      <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="group/list mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((sv, i) => {
           const col = colors[i % colors.length];
           return (
@@ -185,7 +186,10 @@ export function Skills({ services }: { services: Service[] }) {
               key={sv.title}
               data-reveal=""
               data-reveal-type="pop"
-              style={{ "--rd": `${i * 120}ms` } as CSSProperties}
+              // Cada tarjeta aparece cuando llega a la pantalla. El pequeño
+              // retraso solo se usa entre tarjetas que están en la misma fila.
+              className="sm:[--rd:calc(var(--col2)*120ms)] lg:[--rd:calc(var(--col4)*120ms)]"
+              style={{ "--col2": i % 2, "--col4": i % 4 } as CSSProperties}
             >
               <div
                 ref={(el) => {
@@ -202,7 +206,7 @@ export function Skills({ services }: { services: Service[] }) {
                     show(i);
                   }
                 }}
-                className={`group flex h-full cursor-act flex-col rounded-[1.75rem] border border-ink/10 p-6 transition-transform duration-300 hover:-translate-y-1 hover:rotate-[-0.6deg] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-fuchsia sm:p-7 ${
+                className={`group flex h-full cursor-act flex-col rounded-[1.75rem] border border-ink/10 p-6 outline-3 outline-offset-0 outline-transparent transition-[translate,rotate,outline-color,outline-offset] duration-300 hover:-translate-y-1 hover:rotate-[-0.6deg] hover:outline-offset-4 hover:outline-fuchsia focus-visible:rounded-[1.75rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-fuchsia group-hover/list:not-hover:outline-transparent group-hover/list:not-hover:outline-offset-0 sm:p-7 ${
                   open === i ? "invisible" : ""
                 }`}
                 style={{ background: col.bg, color: col.fg }}
