@@ -227,6 +227,11 @@ label,
   .pop {
     animation: pop 0.22s cubic-bezier(0.2, 0.8, 0.3, 1) both;
   }
+  /* Portada "reiniciada" (fuera de pantalla): al quitar la clase, vuelve a animarse */
+  .rise-reset .rise {
+    animation: none;
+    opacity: 0;
+  }
   .folder:hover .folder-icon {
     animation: jiggle 0.45s ease-in-out;
   }
@@ -338,16 +343,17 @@ label,
     animation-play-state: paused;
   }
 }
+/* --dir vale 1 al bajar y -1 al subir: al subir los elementos entran desde arriba */
 @keyframes reveal-up {
   from {
     opacity: 0;
-    transform: translateY(36px);
+    transform: translateY(calc(36px * var(--dir, 1)));
   }
 }
 @keyframes reveal-pop {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.82);
+    transform: translateY(calc(20px * var(--dir, 1))) scale(0.82);
   }
 }
 @keyframes reveal-left {
