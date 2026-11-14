@@ -196,6 +196,17 @@ const imgs = (folder: string, n: number) =>
 
 export const projects: Project[] = [
   {
+    title: "Acuna",
+    kind: "Marca, identidad, diseño de landing y app",
+    summary:
+      "Acuna App acompaña el embarazo semana a semana: diario, citas médicas, contador de contracciones, checklists, comunidad y un espacio para quien acompaña. Diseñé el logo, la landing y las pantallas de la app, con una estética suave y cálida.",
+    tags: ["App", "UX/UI", "Logo", "Landing", "Identidad"],
+    color: "peony",
+    images: imgs("acuna", 39),
+    href: "https://mamadashboard.vercel.app/",
+    hrefLabel: "Ver la app",
+  },
+  {
     title: "Centro Cultural Federico Leloir",
     kind: "Identidad visual y campaña",
     summary:
@@ -288,17 +299,6 @@ export const projects: Project[] = [
     tags: ["Afiches", "Imagen", "Tipografía"],
     color: "pistachio",
     images: imgs("afiches", 4),
-  },
-  {
-    title: "Acuna",
-    kind: "Marca y diseño de app",
-    summary:
-      "Acuna App acompaña el embarazo semana a semana: diario, citas médicas, contador de contracciones, checklists, comunidad y un espacio para quien acompaña. Diseñé el logo, la landing y las pantallas de la app, con una estética suave y cálida.",
-    tags: ["App", "UX/UI", "Logo", "Landing"],
-    color: "fuchsia",
-    images: imgs("acuna", 39),
-    href: "https://mamadashboard.vercel.app/",
-    hrefLabel: "Ver la app",
   },
 ];
 
