@@ -18,7 +18,7 @@ import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
 import { Method } from "@/components/Method";
 import { ScrollEffects } from "@/components/ScrollEffects";
-import { ToolIcon } from "@/components/ToolIcon";
+import { ToolList } from "@/components/ToolList";
 
 // Colores de las tarjetas de habilidades (fondo y texto, ya con buen contraste)
 const serviceColors = [
@@ -187,26 +187,7 @@ export default function Home() {
                 </div>
               )}
 
-              <ul
-                aria-label="Herramientas"
-                className="mx-auto mt-8 grid max-w-sm grid-cols-4 gap-x-2 gap-y-4 rounded-[1.4rem] bg-surface px-3 py-4"
-              >
-                {tools.map((t, i) => (
-                  <li
-                    key={t}
-                    title={t}
-                    data-reveal=""
-                    data-reveal-type="pop"
-                    className="flex flex-col items-center gap-1.5"
-                    style={{ "--rd": `${250 + i * 80}ms` } as CSSProperties}
-                  >
-                    <ToolIcon name={t} className="size-12" />
-                    <span className="text-center text-[0.68rem] leading-tight text-ink/80">
-                      {t === "Visual Studio Code" ? "VS Code" : t}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <ToolList tools={tools} />
             </div>
 
             <div className="md:col-span-7">

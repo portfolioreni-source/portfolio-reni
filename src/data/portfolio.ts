@@ -47,15 +47,21 @@ export const marquee = [
   "Moda",
 ];
 
-export const tools = [
-  "Illustrator",
-  "Photoshop",
-  "Lightroom",
-  "InDesign",
-  "Canva",
-  "Figma",
-  "CapCut",
-  "Visual Studio Code",
+// Herramientas que usás y con qué nivel. El nombre elige el icono (ver ToolIcon.tsx).
+// Niveles posibles: "avanzado" o "intermedio". Al pasar el mouse (o tocar, en el
+// celular) cada icono muestra su nivel.
+export type ToolLevel = "avanzado" | "intermedio";
+export type Tool = { name: string; level: ToolLevel };
+
+export const tools: Tool[] = [
+  { name: "Illustrator", level: "avanzado" },
+  { name: "Photoshop", level: "avanzado" },
+  { name: "Lightroom", level: "avanzado" },
+  { name: "InDesign", level: "avanzado" },
+  { name: "Canva", level: "avanzado" },
+  { name: "Figma", level: "intermedio" },
+  { name: "CapCut", level: "intermedio" },
+  { name: "Visual Studio Code", level: "intermedio" },
 ];
 
 // Habilidades que ofreces (se muestran como tarjetas). Puedes poner las que quieras.
