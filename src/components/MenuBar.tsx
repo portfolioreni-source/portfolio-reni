@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { RkMark } from "@/components/RkMark";
 
 // Reloj de la barra de menú. En el servidor devuelve "" para no desajustar el HTML.
 function subscribe(onChange: () => void) {
@@ -26,7 +27,8 @@ export function MenuBar({ name }: { name: string }) {
   return (
     <div className="fixed inset-x-0 top-0 z-40 flex h-8 items-center justify-between border-b border-ink/10 bg-paper/70 px-4 text-[0.8rem] backdrop-blur-md">
       <nav aria-label="Barra de menú" className="flex items-center gap-5">
-        <a href="#inicio" className="font-bold">
+        <a href="#inicio" className="flex items-center gap-2 font-bold">
+          <RkMark className="h-[19px] w-auto text-fuchsia -my-1" />
           {name}
         </a>
         <a href="#sobre-mi" className="hidden text-muted hover:text-ink sm:inline">
