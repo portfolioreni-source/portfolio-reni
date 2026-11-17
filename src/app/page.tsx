@@ -18,6 +18,7 @@ import { Desktop } from "@/components/Desktop";
 import { Dock } from "@/components/Dock";
 import { FolderIcon } from "@/components/FolderIcon";
 import { MenuBar } from "@/components/MenuBar";
+import { RkMark } from "@/components/RkMark";
 import { Method } from "@/components/Method";
 import { ScrollEffects } from "@/components/ScrollEffects";
 import { Skills } from "@/components/Skills";
@@ -402,7 +403,11 @@ export default function Home() {
               ))}
             </div>
 
-            <p className="mt-20 text-sm text-muted">© 2026 {profile.name}</p>
+            {/* firma: la marca personal cierra la página */}
+            <div className="mt-20 flex flex-col items-center gap-4" data-reveal="">
+              <RkMark className="h-14 w-auto text-burgundy sm:h-16" />
+              <p className="text-sm text-muted">© 2026 {profile.name}</p>
+            </div>
           </div>
         </section>
       </main>
