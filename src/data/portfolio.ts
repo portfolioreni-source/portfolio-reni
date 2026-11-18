@@ -14,7 +14,7 @@ export const profile = {
   photo: "/yo-portada.jpg", // foto de la portada (se muestra dentro de un arco, no hace falta recortarla)
   aboutPhoto: "", // foto recortada para "Sobre mí", por ejemplo "/yo-sobre-mi.png"
   about: [
-    "¡Hola! Soy Renata, una apasionada de comunicar a través del diseño, los colores, las imágenes, la tipografía y la interacción.",
+    "¡Hola! Soy Renata, tengo 21 años. Desde chica me apasiona la moda, los colores, las redes sociales, el maquillaje, el cuidado de la piel, el packaging, viajar y pasar tiempo con mi familia y amigos. Una vez que me metí en el mundo del diseño, me convertí en una apasionada de comunicar a través del mismo, utilizando colores, imágenes, tipografía y, cuando se trata de web, aprovechar la interacción.",
     "Me encanta, en cada proyecto, poder acompañar más allá de lo estético: entender el por qué de una necesidad y, con eso, llegar a un resultado que represente.",
   ],
   email: "rekastikadesign@gmail.com",
