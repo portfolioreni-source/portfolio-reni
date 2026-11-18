@@ -29,16 +29,27 @@ export const profile = {
 };
 
 // Cada item se muestra como una carpeta. "place" es el subtítulo y es opcional.
-type FolderItem = { title: string; place?: string };
+// "image" (opcional) es una foto en /public: asoma en la carpeta y se abre al tocarla.
+export type FolderItem = { title: string; place?: string; image?: string };
 
 export const education: FolderItem[] = [
-  { title: "Secundario completo", place: "Bachiller especializado en artes" },
+  {
+    title: "Secundario completo",
+    place: "Bachiller especializado en artes",
+    image: "/sobre-mi/secundario-completo.jpg",
+  },
   { title: "Licenciatura en Diseño en Comunicación Visual, Gráfica y Digital" },
 ];
 
 export const awards: FolderItem[] = [
-  { title: "Distinción por trayectoria escolar en 5.º año del secundario" },
-  { title: "Mención especial por trayectoria académica en el secundario" },
+  {
+    title: "Distinción por trayectoria escolar en 5.º año del secundario",
+    image: "/sobre-mi/distincion-5-anio.jpg",
+  },
+  {
+    title: "Mención especial por trayectoria académica en el secundario",
+    image: "/sobre-mi/mencion-especial.jpg",
+  },
   { title: "Mención especial por estar entre los 10 mejores promedios de primer año de la universidad" },
 ];
 

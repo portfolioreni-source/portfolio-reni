@@ -16,7 +16,7 @@ import {
 import { CopyEmail } from "@/components/CopyEmail";
 import { Desktop } from "@/components/Desktop";
 import { Dock } from "@/components/Dock";
-import { FolderIcon } from "@/components/FolderIcon";
+import { AboutFolder } from "@/components/AboutFolder";
 import { MenuBar } from "@/components/MenuBar";
 import { RkMark } from "@/components/RkMark";
 import { Method } from "@/components/Method";
@@ -241,15 +241,8 @@ export default function Home() {
                         key={e.title}
                         data-reveal=""
                         style={stagger(i * 120)}
-                        className="flex items-center gap-4"
                       >
-                        <FolderIcon className="w-11 shrink-0" />
-                        <p>
-                          <span className="block font-medium">{e.title}</span>
-                          {e.place && (
-                            <span className="text-sm text-muted">{e.place}</span>
-                          )}
-                        </p>
+                        <AboutFolder item={e} />
                       </li>
                     ))}
                   </ul>

@@ -1,6 +1,13 @@
 // Icono de carpeta dibujado en SVG (sin gradientes con id, para poder repetirlo).
 // Colores de la paleta: fuchsia por detrás, rosa vivo por delante.
-export function FolderIcon({ className = "" }: { className?: string }) {
+// Con "photo", una foto con borde blanco asoma desde adentro de la carpeta.
+export function FolderIcon({
+  className = "",
+  photo,
+}: {
+  className?: string;
+  photo?: string;
+}) {
   return (
     <svg
       viewBox="0 0 112 92"
@@ -12,6 +19,20 @@ export function FolderIcon({ className = "" }: { className?: string }) {
         d="M6 14a8 8 0 0 1 8-8h28a8 8 0 0 1 6 2.7l5.2 6A8 8 0 0 0 59.3 17H98a8 8 0 0 1 8 8v8H6z"
         fill="#f50083"
       />
+      {photo && (
+        <g transform="rotate(-4 56 30)">
+          <rect x="14" y="1" width="82" height="46" rx="2.5" fill="#fff" />
+          {/* el svg anidado recorta la foto a su recuadro */}
+          <svg x="16.5" y="3.5" width="77" height="41">
+            <image
+              href={photo}
+              width="77"
+              height="41"
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </svg>
+        </g>
+      )}
       <rect x="6" y="25" width="100" height="61" rx="9" fill="#ff8fc0" />
       <rect x="6" y="25" width="100" height="14" rx="7" fill="#ffb3d5" />
       <rect
