@@ -206,6 +206,21 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+
+                <h3 className="mt-10 text-sm font-bold">De dónde soy</h3>
+                <p
+                  className="mt-4 inline-flex items-center gap-2 text-lg font-medium"
+                  data-reveal=""
+                >
+                  {/* pin de ubicación */}
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5 shrink-0 text-fuchsia">
+                    <path
+                      fill="currentColor"
+                      d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"
+                    />
+                  </svg>
+                  {profile.location}
+                </p>
               </div>
             </div>
 

@@ -10,6 +10,7 @@ export const profile = {
   headline:
     "¿Tu marca no transmite lo que querés? Te ayudo a diseñar una identidad que te represente. Desde la comunicación en redes, producciones de fotos, hasta la página web.",
   availability: "Disponible para nuevos proyectos",
+  location: "Buenos Aires, Argentina", // se ve en "Sobre mí", debajo de "Así soy"
   photo: "/yo-portada.jpg", // foto de la portada (se muestra dentro de un arco, no hace falta recortarla)
   aboutPhoto: "", // foto recortada para "Sobre mí", por ejemplo "/yo-sobre-mi.png"
   about: [
