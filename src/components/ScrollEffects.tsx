@@ -19,25 +19,47 @@ export function ScrollEffects() {
     const root = document.documentElement;
 
     // 1) Aparición cada vez que entra en pantalla
+    // Un contenedor con data-reveal-group (y la condición de pantalla que diga)
+    // hace aparecer a todos sus elementos juntos cuando él llega, en vez de uno
+    // por uno. Así las carpetas de abajo del escritorio no llegan tarde.
+    const groups = new Map<HTMLElement, HTMLElement[]>();
+    document.querySelectorAll<HTMLElement>("[data-reveal-group]").forEach((g) => {
+      const q = g.dataset.revealGroup;
+      if (q && !window.matchMedia(q).matches) return;
+      groups.set(g, Array.from(g.querySelectorAll<HTMLElement>("[data-reveal]")));
+    });
+    const grouped = new Set([...groups.values()].flat());
+    const setState = (el: HTMLElement, state: "in" | "hidden") => {
+      for (const t of groups.get(el) ?? [el]) {
+        if (t.dataset.reveal !== state) t.dataset.reveal = state;
+      }
+    };
+
     const reveal = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           const el = entry.target as HTMLElement;
           if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-            if (el.dataset.reveal !== "in") el.dataset.reveal = "in";
+            setState(el, "in");
           } else if (!entry.isIntersecting) {
             // Solo se "reinicia" cuando ya no se ve nada de él
-            if (el.dataset.reveal !== "hidden") el.dataset.reveal = "hidden";
+            setState(el, "hidden");
           }
         }
       },
       { threshold: [0, 0.12], rootMargin: "0px 0px -6% 0px" },
     );
 
+    // Lo que ya se ve al cargar se muestra; lo demás espera a llegar
+    const startsIn = (el: HTMLElement) =>
+      el.getBoundingClientRect().top < window.innerHeight * 0.92;
+    groups.forEach((_, g) => {
+      setState(g, startsIn(g) ? "in" : "hidden");
+      reveal.observe(g);
+    });
     document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
-      // Lo que ya se ve al cargar se muestra; lo demás espera a llegar
-      el.dataset.reveal =
-        el.getBoundingClientRect().top < window.innerHeight * 0.92 ? "in" : "hidden";
+      if (grouped.has(el)) return;
+      el.dataset.reveal = startsIn(el) ? "in" : "hidden";
       reveal.observe(el);
     });
 

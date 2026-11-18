@@ -29,6 +29,12 @@ const tagVars = (c: ProjectColor) =>
 const sizes = imageSizes as unknown as Record<string, [number, number]>;
 const dims = (src: string) => sizes[src] ?? [1600, 1200];
 const isVideo = (src: string) => src.endsWith(".mp4");
+// Miniatura que asoma en la carpeta: la primera imagen del proyecto, achicada
+// (archivo "<nombre>.thumb.jpg" al lado de la original).
+const thumbOf = (p: Project) => {
+  const first = allImages(p).find((s) => !isVideo(s));
+  return first ? asset(first.replace(/\.jpg$/, ".thumb.jpg")) : undefined;
+};
 
 function Video({ src, className }: { src: string; className?: string }) {
   const [w, h] = dims(src);
@@ -217,6 +223,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
     <>
       <div
         ref={areaRef}
+        data-reveal-group="(min-width: 768px)"
         onClick={(e) => {
           if (e.target === e.currentTarget) setSelected(null);
         }}
@@ -250,7 +257,7 @@ export function Desktop({ projects }: { projects: Project[] }) {
               } as CSSProperties
             }
           >
-            <FolderIcon className="folder-icon w-20 drop-shadow-[0_8px_10px_rgba(121,0,46,0.22)] sm:w-24 md:w-28" />
+            <FolderIcon photo={thumbOf(p)} className="folder-icon w-20 drop-shadow-[0_8px_10px_rgba(121,0,46,0.22)] sm:w-24 md:w-28" />
             <span
               className="folder-label mt-2 rounded-md px-1.5 py-0.5 text-xs font-semibold leading-snug sm:px-2 sm:text-sm"
               style={tagVars(p.color)}
